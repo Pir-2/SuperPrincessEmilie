@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Super Princess Emilie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/torchQuest.js"></script>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/torchQuest.css">
+</head>
+
+<body>
+    <img id="tileset" src="img/building.png" alt="tileset" hidden/>
+    <img id="player" src="img/player.png" alt="player" hidden/>
+
+    <div id="mainZone">
+        <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+
+        <div id="divTorchQuest" width="800" height="640">
+            <div id="coffre">
+                <img class="itemTorch" src="img/gameDragDrop/torch.png"/>
+                <!--<img class="itemPant draggable" src="img/gameDragDrop/pant.png"/>-->
+                <!--<img class="itemShirt draggable" src="img/gameDragDrop/shirt.png"/>-->
+                <img class="itemShovel draggable" src="img/gameDragDrop/shovel.png"/>
+                <!--<img class="itemSock draggable" src="img/gameDragDrop/sock.png"/>-->
+                <!--<img class="itemSword draggable" src="img/gameDragDrop/sword.png"/>-->
+            </div>
+
+            <div class="dropper">
+            </div>
+        </div>
+
+        <!--Boite de dialogue-->
+        <div class="box">
+            <div id="title"><span id="name">Name</span></div>
+            <div id="message"></div>
+        </div>
+    </div>
+</body>
+</html>

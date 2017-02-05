@@ -1,0 +1,57 @@
+#divTorchQuest {
+    background-image: url("../img/gameDragDrop/fond.png");
+    background-repeat: no-repeat;
+    width: 1100px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#coffre {
+    background-image: url("../img/gameDragDrop/coffre.png");
+    background-repeat: no-repeat;
+    width: 421px;
+    height: 387px;
+
+    position:relative;
+    float:left;
+    top: 100px;
+    left: 5%;
+}
+
+.dropper {
+    background-image: url("../img/gameDragDrop/coffre.png");
+    background-repeat: no-repeat;
+    width: 421px;
+    height: 387px;
+    transition: all 200ms linear;
+
+    position:relative;
+    float:right;
+    top: 100px;
+    right: 5%;
+}
+
+.itemTorch {
+    position: relative;
+    left: 50px;
+    top: 50px;
+}
+
+.itemShovel {
+    position: relative;
+    left: 50px;
+    top: -150px;
+}
+
+
+
+.drop_hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
+}
+
+.draggable {
+    cursor: move;
+    transition: all 200ms linear;
+    user-select: none;
+}
