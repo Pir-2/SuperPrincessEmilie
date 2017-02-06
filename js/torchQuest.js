@@ -1,3 +1,12 @@
+/**
+ * Gère la quête de la torche
+ * Déplacement des items
+ *
+ * Reste à faire:
+ *  Ajouter les images
+ *  Gérer correctement le déplacement d'un coffre à un autre
+ *  Fermeture automatique lorsque la torche est trouvée
+ */
 $(document).ready(function() {
     $(".itemTorch").click(function() {
         alert( "Trouvé !" );

@@ -9,17 +9,12 @@ var tileset_x = new Array();
 //position y de la tile en fonction de son numéro
 var tileset_y = new Array();
 
-/**
- * Variables concernant le joueur
- */
 var player = null;
-var player_x = null;
-var player_y = null;
-var player_width = 32;
-var player_height = 48;
-var player_position_x = 5; //Position de départ
-var player_position_y = 5;
-var player_regard = 2;
+
+/**
+ * Permet de stocker la sortie d'une maison lorsque l'on rentre dedans (Voir fonction leaveHouse
+ */
+var coordDoor = null;
 
 /**
  * Booléen indiquant si le joueur possède les items nécessaires pour entrer dans la grotte
@@ -41,16 +36,24 @@ var tileAvailable = [270, 8, 7, 37, 66, 67, 68,72, 97, 252, 253, 463];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
- * 119: -
+ * 119: Statue (temporaire)
  */
 var tileToTalk = [119];
 
+/**
+ * Lorsque le HTML est chargé,
+ *      Initialise la map
+ *      Initialise le joueur
+ *      Dessine le tout
+ *      Ecoute les saisies clavier
+ */
 $(document).ready(function() {
     initTileSet();
 
     map = new Map(0);
 
-    initPlayer();
+    player = new Player();
+
 
     Dessiner();
 
@@ -77,20 +80,9 @@ function initTileSet() {
 }
 
 /**
- * Initialisation du joueur
+ * Dessine la map et le personnage
+ * @constructor
  */
-function initPlayer() {
-//image du joueur
-//le joueur peut être plus grand qu'une tile, sa position est ajusté
-    player = document.getElementById("player");
-//hauteur et largeur du sprite du joueur
-
-//position x du joueur en fonction de son regard
-    player_x = new Array(player_width,player_width,player_width,player_width);
-//position y du joueur en fonction de son
-    player_y = new Array(player_height*3,player_height,0,player_height*2);
-}
-
 function Dessiner() {
     //==================================================Affichage====================================================
     var c = document.getElementById("myCanvas");
@@ -105,7 +97,7 @@ function Dessiner() {
         }
     }
     //on dessine le joueur
-    ctx.drawImage(player,player_x[player_regard],player_y[player_regard],player_width,player_height,player_position_x*tiles_dimension,player_position_y*tiles_dimension-player_height+tiles_dimension,player_width,player_height);
+    ctx.drawImage(player.sprite,player.x[player.regard],player.y[player.regard],player.width,player.height,player.position_x*tiles_dimension,player.position_y*tiles_dimension-player.height+tiles_dimension,player.width,player.height);
 }
 
 /**
@@ -119,14 +111,14 @@ function khandle(e) {
     //haut
     if(e.keyCode === 38)
     {
-        player_regard=0;
+        player.regard=0;
 
-        if(player_position_y > 0) {
-            if(tileAvailable.includes(map.map[player_position_y-1][player_position_x])) {
-                if(map.map[player_position_y-1][player_position_x] === 463) {
-                    enterHouse();
+        if(player.position_y > 0) {
+            if(tileAvailable.includes(map.map[player.position_y-1][player.position_x])) {
+                if(map.map[player.position_y-1][player.position_x] === 463) {
+                    enterHouse(map.id, player.position_x, player.position_y-1);
                 }
-               player_position_y--;
+               player.position_y--;
             }
         } else {
             mapTop(map.id)
@@ -135,12 +127,12 @@ function khandle(e) {
     //gauche
     if(e.keyCode === 37)
     {
-        player_regard=1;
+        player.regard=1;
 
-        if(tileAvailable.includes(map.map[player_position_y][player_position_x-1])) {
-            if(player_position_x>0)player_position_x--;
+        if(tileAvailable.includes(map.map[player.position_y][player.position_x-1])) {
+            if(player.position_x>0)player.position_x--;
         } else {
-            if(player_position_x === 0) {
+            if(player.position_x === 0) {
                 //Changement de map
                 mapLeft(map.id)
             }
@@ -149,24 +141,24 @@ function khandle(e) {
     //bas
     if(e.keyCode === 40)
     {
-        player_regard=2;
+        player.regard=2;
 
-        if(tileAvailable.includes(map.map[player_position_y+1][player_position_x])) {
-            if(map.map[player_position_y+1][player_position_x] === 463) {
+        if(tileAvailable.includes(map.map[player.position_y+1][player.position_x])) {
+            if(map.map[player.position_y+1][player.position_x] === 463) {
                 leaveHouse();
             }
-            if(player_position_y<map.hauteur-1)player_position_y++;
+            if(player.position_y<map.hauteur-1)player.position_y++;
         }
     }
     //droite
     if(e.keyCode === 39)
     {
-        player_regard=3;
+        player.regard=3;
 
-        if(tileAvailable.includes(map.map[player_position_y][player_position_x+1])) {
-            player_position_x++;
+        if(tileAvailable.includes(map.map[player.position_y][player.position_x+1])) {
+            player.position_x++;
         } else {
-            if(player_position_x === map.largeur-1) {
+            if(player.position_x === map.largeur-1) {
                 //Changement de map
                 mapRight(map.id)
             }
@@ -176,22 +168,22 @@ function khandle(e) {
     //Espace
     if(e.keyCode === 32)
     {
-        switch(player_regard) {
+        switch(player.regard) {
             case 0:
-                if(tileToTalk.includes(map.map[player_position_y-1][player_position_x])) {
-                    startToTalk(map.map[player_position_y-1][player_position_x]);
+                if(tileToTalk.includes(map.map[player.position_y-1][player.position_x])) {
+                    startToTalk(map.map[player.position_y-1][player.position_x]);
                 } break;
             case 1:
-                if(tileToTalk.includes(map.map[player_position_y][player_position_x-1])) {
-                    startToTalk(map.map[player_position_y][player_position_x-1]);
+                if(tileToTalk.includes(map.map[player.position_y][player.position_x-1])) {
+                    startToTalk(map.map[player.position_y][player.position_x-1]);
                 } break;
             case 2:
-                if(tileToTalk.includes(map.map[player_position_y+1][player_position_x])) {
-                    startToTalk(map.map[player_position_y+1][player_position_x]);
+                if(tileToTalk.includes(map.map[player.position_y+1][player.position_x])) {
+                    startToTalk(map.map[player.position_y+1][player.position_x]);
                 } break;
             case 3:
-                if(tileToTalk.includes(map.map[player_position_y][player_position_x+1])) {
-                    startToTalk(map.map[player_position_y][player_position_x+1]);
+                if(tileToTalk.includes(map.map[player.position_y][player.position_x+1])) {
+                    startToTalk(map.map[player.position_y][player.position_x+1]);
                 } break;
         }
     }
@@ -211,22 +203,25 @@ function khandle(e) {
     Dessiner();
 }
 
+
 /**
- * FAIRE UNE FONCTION GENERIQUE A TOUTES LES MAISONS ?
- * Entre dans la maison avec la porte ouverte
- * Attention ! Si plus d'une maison avec la porte ouverte, refaire le code
- * Idem si on déplace la maison.
+ * Permet de rentrer dans la maison. ATTENTION CHARGE TOUJOURS LE MÊME INTERIEUR
+ * Les paramètres permettent de ressortir de la maison
+ * @param mapId: iD de la map ou la maison est située
+ * @param xDoor: coordonnée x de la porte
+ * @param yDoor: coordonnée y-1 de la porte
  */
-function enterHouse() {
+function enterHouse(mapId, xDoor, yDoor) {
+    coordDoor = [mapId, xDoor, yDoor];
     map = new Map(5);
-    player_position_x = 9;
-    player_position_y = 15;
+    player.position_x = 9;
+    player.position_y = 15;
 }
 
 function leaveHouse() {
-    map = new Map(0);
-    player_position_x = 4;
-    player_position_y = 8;
+    map = new Map(coordDoor[0]);
+    player.position_x = coordDoor[1];
+    player.position_y = coordDoor[2];
 }
 
 /**
@@ -237,15 +232,15 @@ function mapRight(id) {
     switch(id) {
         case 2:
             map = new Map(0);
-            player_position_x = 0;
+            player.position_x = 0;
             break;
         case 0:
             map = new Map(1);
-            player_position_x = 0;
+            player.position_x = 0;
             break;
         case 3:
             map = new Map(4);
-            player_position_x = 0;
+            player.position_x = 0;
             break;
     }
 }
@@ -258,11 +253,11 @@ function mapLeft(id) {
     switch(id) {
         case 1:
             map = new Map(0);
-            player_position_x = 19;
+            player.position_x = 19;
             break;
         case 0:
             map = new Map(2);
-            player_position_x = 19;
+            player.position_x = 19;
             break;
     }
 }
@@ -277,13 +272,13 @@ function mapTop(id) {
             if(haveTorch && haveCompass) {
                 alert("Tu es sur le point d'entrer dans la grotte ! Es-tu prêt ?");
                 map = new Map(3);
-                player_position_y = 19;
+                player.position_y = 19;
                 break;
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
                     "C'est trop dangereux sans des équipements pour te repérer !");
-                player_regard=2;
-                player_position_y++;
+                player.regard=2;
+                player.position_y++;
             }
     }
 }
@@ -320,17 +315,7 @@ function launchTorchQuest() {
 /**
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
-function launchMonkeyQuest() {
-    var c = document.getElementById("divTorchQuest");
-    var ctx = c.getContext("2d");
-
-    var img = new Image();
-    img.src = 'img/singe.jpg';
-    img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        ctx.beginPath();
-    }
-
+function launchCompassQuest() {
     // $(".box").show();
     //
     // Speak("Simon", "Bonjour jeune princesse ! Que fais-tu dans cette foret ? \n" +

@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/player.js"></script>
     <script src="js/torchQuest.js"></script>
 
     <link rel="stylesheet" href="css/main.css">
@@ -17,12 +18,15 @@
     <img id="tileset" src="img/building.png" alt="tileset" hidden/>
     <img id="player" src="img/player.png" alt="player" hidden/>
 
+    <!--Zone contenant la carte du monde et les quêtes-->
     <div id="mainZone">
+        <!--Carte du monde-->
         <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML5 canvas tag.
         </canvas>
 
-        <div id="divTorchQuest" width="800" height="640">
+        <!--!!! Une div par quete !!!-->
+        <div id="divTorchQuest" width="1100" height="700">
             <div id="coffre">
                 <img class="itemTorch" src="img/gameDragDrop/torch.png"/>
                 <!--<img class="itemPant draggable" src="img/gameDragDrop/pant.png"/>-->
@@ -34,6 +38,14 @@
 
             <div class="dropper">
             </div>
+        </div>
+
+        <div id="divCompassQuest" width="1100" height="700">
+            <!--Mettre les conteneurs nécessaires-->
+        </div>
+
+        <div id="divFightDragon" width="1100" height="700">
+            <!--Mettre les conteneurs nécessaires-->
         </div>
 
         <!--Boite de dialogue-->

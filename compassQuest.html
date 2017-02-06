@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <img class="hiddenImg" src="img/compassQuest/fond1.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond2.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond3.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond4.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond5.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond6.png"/>
+    <img class="hiddenImg" src="img/compassQuest/fond7.png"/>
+
+    <button id="redButton"></button>
+    <button id="blueButton"></button>
+    <button id="greenButton"></button>
+    <button id="yellowButton"></button>
+
+</body>
+
+<style>
+    .hiddenImg {
+        display: none;
+    }
+
+    #myCanvas {
+        /*background-image: url("img/compassQuest/fond1.png");*/
+        width: 1100px;
+        height: 600px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+    }
+
+    #redButton {
+        background: #fe1a00;
+        border-radius:10px;
+        border:1px solid #d83526;
+        display:inline-block;
+
+        padding:50px 50px;
+    }
+    #redButton:hover {
+        background-color:#ce0100;
+    }
+
+    #redButton:active {
+        background: #3e8e41;
+    }
+
+    #blueButton {
+        background: #0d06fe;
+        border-radius:10px;
+        border:1px solid #0d06fe;
+        display:inline-block;
+
+        padding:50px 50px;
+    }
+    #blueButton:hover {
+        background-color: #012bfe;
+    }
+
+    #greenButton {
+        background: #09b31f;
+        border-radius:10px;
+        border:1px solid #09b31f;
+        display:inline-block;
+
+        padding:50px 50px;
+    }
+    #greenButton:hover {
+        background-color: #09ce24;
+    }
+
+    #yellowButton {
+        background: #f8fe00;
+        border-radius:10px;
+        border:1px solid #f8fe00;
+        display:inline-block;
+
+        padding:50px 50px;
+    }
+    #yellowButton:hover {
+        background-color: #defe00;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function() {
+//        $("#redButton").click(function () {
+//            alert("Trouvé !");
+//        });
+
+        $("#myCanvas").css("background-image", "url(img/compassQuest/fond3.png");
+        var fond = ["fond1.png", "fond2.png", "fond3.png", "fond4.png", "fond5.png", "fond6.png", "fond7.png"];
+        var i = 0;
+        var inverse = false;
+
+        clickRedButton();
+
+        function clickRedButton(){
+            //setTimeout($("#redButton").css("background-color", "blue"), 2000);
+            $("#redButton").css("background-color", "grey");
+            setTimeout(clickRedButton, 2000);
+        }
+
+
+        explode();
+
+        function explode(){
+            if(i<6 & inverse === false) {
+                i++;
+            } else {
+                inverse = true;
+
+                if(i === 1) {
+                    inverse = false;
+                }
+                i--;
+            }
+
+            $("#myCanvas").css("background-image", "url(img/compassQuest/"+fond[i]+")");
+            setTimeout(explode, 50);
+        }
+    });
+</script>
+
+</html>
