@@ -32,7 +32,7 @@ var haveCompass = false;
  * 97: Chemin avec herve en bas
  * 463: Porte ouverte (Tile à modifier)
  */
-var tileAvailable = [270, 8, 7, 37, 66, 67, 68,72, 97, 252, 253, 463];
+var tileAvailable = [270, 8, 7, 37, 66, 67, 68,72, 97, 252, 253, 463, 475, 374, 445];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
@@ -87,7 +87,7 @@ function Dessiner() {
     //==================================================Affichage====================================================
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
-    //on dessine la map sur le canevass
+    //on dessine la map sur le canvas
     for(var y=0; y<map.hauteur; y++)
     {
         for(var x=0; x<map.largeur; x++)
@@ -98,7 +98,19 @@ function Dessiner() {
     }
     //on dessine le joueur
     ctx.drawImage(player.sprite,player.x[player.regard],player.y[player.regard],player.width,player.height,player.position_x*tiles_dimension,player.position_y*tiles_dimension-player.height+tiles_dimension,player.width,player.height);
+    if(map.id == 3 ||map.id == 6){
+        drawAllo(player.position_x,player.position_y);
+    }
 }
+
+function drawAllo(x,y){
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = new Image();
+    img.src = "img/allo.png";
+    ctx.drawImage(img,x*30-500,y*30-500);
+}
+
 
 /**
  * Gère les mouvements du personnage
@@ -142,12 +154,16 @@ function khandle(e) {
     if(e.keyCode === 40)
     {
         player.regard=2;
-
-        if(tileAvailable.includes(map.map[player.position_y+1][player.position_x])) {
-            if(map.map[player.position_y+1][player.position_x] === 463) {
-                leaveHouse();
+        if(player.position_y < 19){
+            if(tileAvailable.includes(map.map[player.position_y+1][player.position_x])) {
+                if(map.map[player.position_y+1][player.position_x] === 463) {
+                    leaveHouse();
+                }
+                if(player.position_y<map.hauteur-1)player.position_y++;
             }
-            if(player.position_y<map.hauteur-1)player.position_y++;
+        }
+        else{
+            mapBottom(map.id);
         }
     }
     //droite
@@ -200,6 +216,28 @@ function khandle(e) {
         enterPressed = true;
     }
 
+    /**
+     * bouton dans la première map de labyrinthe
+     */
+    if((map.map[player.position_y][player.position_x]) == 374){
+        if(map.id == 3){
+            if(player.position_y == 5 && player.position_x == 1){
+                map.map[10][10] = 67;
+            }
+            else{
+                map.map[2][13] = 67;
+                map.map[3][13] = 67;
+            }
+
+        }
+    }
+    else if((map.map[player.position_y][player.position_x]) == 475){
+        mapLevelInf(map.id);
+    }
+    else if((map.map[player.position_y][player.position_x]) == 445){
+        mapLevelUp(map.id);
+    }
+
     Dessiner();
 }
 
@@ -238,8 +276,8 @@ function mapRight(id) {
             map = new Map(1);
             player.position_x = 0;
             break;
-        case 3:
-            map = new Map(4);
+        case 4:
+            map = new Map(3);
             player.position_x = 0;
             break;
     }
@@ -259,6 +297,10 @@ function mapLeft(id) {
             map = new Map(2);
             player.position_x = 19;
             break;
+        case 3:
+            map = new Map(4);
+            player.position_x = 19;
+            break;
     }
 }
 
@@ -267,10 +309,10 @@ function mapLeft(id) {
  * @param id de la map actuelle
  */
 function mapTop(id) {
+    drawAllo(player.position_x,player.position_y);
     switch(id) {
         case 1:
-            if(haveTorch && haveCompass) {
-                alert("Tu es sur le point d'entrer dans la grotte ! Es-tu prêt ?");
+            if(true) { //haveTorch && haveCompass
                 map = new Map(3);
                 player.position_y = 19;
                 break;
@@ -282,6 +324,38 @@ function mapTop(id) {
             }
     }
 }
+
+function mapBottom(id) {
+    switch(id) {
+        case 3:
+            map = new Map(1);
+            player.position_y = 0;
+            break;
+    }
+}
+
+function mapLevelInf(id){
+    switch (id) {
+        case 3:
+            map = new Map(6);
+            player.position_x = player.position_x+1;
+            break;
+        default:
+            break;
+    }
+}
+
+function mapLevelUp(id){
+    switch (id) {
+        case 6:
+            map = new Map(3);
+            player.position_x = player.position_x-1;
+            break;
+        default:
+            break;
+    }
+}
+
 
 /**
  * Appelé lorsque le joueur se trouve en face d'un PNJ.
