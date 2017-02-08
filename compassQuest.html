@@ -19,10 +19,10 @@
     <img class="hiddenImg" src="img/compassQuest/fond6.png"/>
     <img class="hiddenImg" src="img/compassQuest/fond7.png"/>
 
-    <button id="redButton"></button>
-    <button id="blueButton"></button>
-    <button id="greenButton"></button>
-    <button id="yellowButton"></button>
+    <button class="buttonGame" id="redButton"></button>
+    <button class="buttonGame" id="blueButton"></button>
+    <button class="buttonGame" id="greenButton"></button>
+    <button class="buttonGame" id="yellowButton"></button>
 
 </body>
 
@@ -45,13 +45,12 @@
     #redButton {
         background: #fe1a00;
         border-radius:10px;
-        border:1px solid #d83526;
         display:inline-block;
 
         padding:50px 50px;
-    }
-    #redButton:hover {
-        background-color:#ce0100;
+
+        position: relative;
+        z-index: 999;
     }
 
     #redButton:active {
@@ -61,61 +60,46 @@
     #blueButton {
         background: #0d06fe;
         border-radius:10px;
-        border:1px solid #0d06fe;
         display:inline-block;
 
         padding:50px 50px;
-    }
-    #blueButton:hover {
-        background-color: #012bfe;
+
+        position: relative;
+        z-index: 999;
     }
 
     #greenButton {
         background: #09b31f;
         border-radius:10px;
-        border:1px solid #09b31f;
         display:inline-block;
 
         padding:50px 50px;
-    }
-    #greenButton:hover {
-        background-color: #09ce24;
+
+        position: relative;
+        z-index: 999;
     }
 
     #yellowButton {
         background: #f8fe00;
         border-radius:10px;
-        border:1px solid #f8fe00;
         display:inline-block;
 
         padding:50px 50px;
-    }
-    #yellowButton:hover {
-        background-color: #defe00;
+
+        position: relative;
+        z-index: 999;
     }
 
 </style>
 
 <script>
     $(document).ready(function() {
-//        $("#redButton").click(function () {
-//            alert("Trouvé !");
-//        });
-
         $("#myCanvas").css("background-image", "url(img/compassQuest/fond3.png");
         var fond = ["fond1.png", "fond2.png", "fond3.png", "fond4.png", "fond5.png", "fond6.png", "fond7.png"];
         var i = 0;
         var inverse = false;
 
-        clickRedButton();
-
-        function clickRedButton(){
-            //setTimeout($("#redButton").css("background-color", "blue"), 2000);
-            $("#redButton").css("background-color", "grey");
-            setTimeout(clickRedButton, 2000);
-        }
-
-
+        //----------------- Mouvement des singes ---------------------//
         explode();
 
         function explode(){
@@ -132,6 +116,107 @@
 
             $("#myCanvas").css("background-image", "url(img/compassQuest/"+fond[i]+")");
             setTimeout(explode, 50);
+        }
+
+        /**
+         * Tableau contenant les boutons et leur couleur temporaire respective
+         */
+        var buttonTab = new Array();
+        buttonTab[0] = new Array("greenButton", "#a1fe68");
+        buttonTab[1] = new Array("yellowButton", "#f4fe9b");
+        buttonTab[2] = new Array("redButton", "#fe7662");
+        buttonTab[3] = new Array("blueButton", "#6690fe");
+
+        var serverCombination = [];
+        var speed = 800;
+        var iteration = 3;
+
+        launchDialog(iteration);
+        startPhase(speed, iteration);
+
+        function startPhase(speed, iterationMax) {
+            setTimeout(function () {
+                if(iterationMax > 0) {
+                    var number = Math.floor(Math.random() * 3) + 0;
+                    var tempTab = buttonTab[number];
+
+                    serverCombination.push(tempTab[0]);
+                    iterationMax--;
+                    flash(tempTab[0], tempTab[1], speed, iterationMax);
+                } else {
+                    playerTurn();
+                    return;
+                }
+            }, 200);
+        }
+
+        function playerTurn() {
+
+        }
+
+        var clickCount = 0;
+
+        $(".buttonGame").click(function() {
+            if(serverCombination[clickCount] != this.id) {
+                alert("PERDU !");
+            }
+
+            clickCount++;
+            if(clickCount === iteration) {
+                if(iteration<5) {
+                    serverCombination = [];
+                    clickCount = 0;
+                    iteration++;
+
+                    launchDialog(iteration);
+                    startPhase(speed-100, iteration);
+                } else {
+                    alert("INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
+                        "J'ai entendu dire que tu souhaitais traverser la grotte.. Voila qui devrait t'aider ! " +
+                        "Vous avez obtenu la BOUSSOLE !");
+                }
+
+            }
+        });
+
+        function launchDialog(iteration) {
+            if(iteration === 3) {
+                alert("Tu es prête ? C'est parti !");
+            } else if (iteration == 4) {
+                alert("Tu es forte ! Et si je vais plus vite ?");
+            } else {
+                alert("Impressionnant ! Et si je tape encore plus vite ?");
+            }
+
+        }
+
+
+        /**
+         *
+         */
+        function flash(element, tempColor, speed, iterationMax) {
+            var oldBackground = hexc($("#"+element).css('backgroundColor'));
+            $("#"+element).css("background-color", tempColor);
+
+            setTimeout(function () {
+                $("#"+element).css("background-color", oldBackground);
+                startPhase(speed, iterationMax);
+            }, speed);
+        }
+
+        /**
+         * Récupère une couleur hexadécimal à partir d'une couleur RGB
+         * @param colorval
+         * @returns {string}
+         */
+        function hexc(colorval) {
+            var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            delete(parts[0]);
+            for (var i = 1; i <= 3; ++i) {
+                parts[i] = parseInt(parts[i]).toString(16);
+                if (parts[i].length == 1) parts[i] = '0' + parts[i];
+            }
+            return '#' + parts.join('');
         }
     });
 </script>
