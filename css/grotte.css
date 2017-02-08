@@ -1,0 +1,11 @@
+html, body{
+    height:100%;
+}
+
+canvas{
+    background-color:#000000;
+    background-image:url(../img/flashlight.png);
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    cursor:none;
+}
