@@ -1,5 +1,4 @@
 var map = null;
-
 var tileset = null;
 var tiles_dimension = 32;
 var tileset_width = 30;
@@ -56,7 +55,7 @@ $(document).ready(function() {
 
 
     Dessiner();
-
+    sonDebut();
     document.onkeydown = khandle
 });
 
@@ -229,7 +228,7 @@ function khandle(e) {
                 map.map[2][13] = 67;
                 map.map[3][13] = 67;
             }
-
+            sonButton();
         }
     }
     else if((map.map[player.position_y][player.position_x]) == 475){
@@ -299,6 +298,7 @@ function mapLeft(id) {
             player.position_x = 19;
             break;
         case 3:
+            sonDebut();
             map = new Map(4);
             player.position_x = 19;
             break;
@@ -314,6 +314,7 @@ function mapTop(id) {
     switch(id) {
         case 1:
             if(true) { //haveTorch && haveCompass
+                sonGrotte();
                 map = new Map(3);
                 player.position_y = 19;
                 break;
@@ -466,4 +467,22 @@ function showScreenQuest(questId) {
         default:
             return;
     }
+}
+
+function sonButton(){
+    soundManager.url = 'swf/';
+    soundManager.debugMode = true;
+    soundManager.play('boutton','sound/Button.mp3');
+}
+
+function sonGrotte(){
+    soundManager.url = 'swf/';
+    soundManager.debugMode = true;
+    soundManager.play('Fond','sound/grotte.mp3');
+}
+
+function sonDebut(){
+    soundManager.url = 'swf/';
+    soundManager.debugMode = true;
+    soundManager.play('Fond','sound/village.mp3');
 }
