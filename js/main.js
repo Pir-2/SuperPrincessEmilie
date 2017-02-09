@@ -479,13 +479,11 @@ function sonButton(){
     soundManager.debugMode = true;
     soundManager.play('boutton','sound/Button.mp3');
 }
-
 function sonGrotte(){
     soundManager.url = 'swf/';
     soundManager.debugMode = true;
     soundManager.play('Fond','sound/grotte.mp3');
 }
-
 function sonDebut(){
     soundManager.url = 'swf/';
     soundManager.debugMode = true;
