@@ -3,7 +3,7 @@
 }
 
 #divCompassQuest {
-    /*background-image: url("img/compassQuest/fond1.png");*/
+    background-color: black;
     width: 1100px;
     height: 600px;
     position: absolute;

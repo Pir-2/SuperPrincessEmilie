@@ -424,7 +424,9 @@ var showTextAndLaunchQuest = function (pnj, message, index, questId) {
 
         setTimeout(function () { showTextAndLaunchQuest(pnj, message, index, questId); }, 50);
     } else {
-        $(".box").hide();
+        setTimeout(function () {
+            $(".box").hide();
+        }, 800);
         showScreenQuest(questId);
     }
 }
@@ -447,7 +449,10 @@ var showText = function (pnj, message, index) {
 
         setTimeout(function () { showTextAndLaunchQuest(pnj, message, index); }, 50);
     } else {
-        $(".box").hide();
+        setTimeout(function () {
+            $(".box").hide();
+        }, 800);
+
     }
 }
 
@@ -467,7 +472,7 @@ function showScreenQuest(questId) {
         case 2:
             $("#myCanvas").hide();
             $("#divCompassQuest").show();
-            launchDialog(iteration);
+            launchDialog(3);
         case 3:
             $("#myCanvas").hide();
             $("#divLightDown").show();
