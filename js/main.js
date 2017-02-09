@@ -38,7 +38,7 @@ var tileAvailable = [270, 8, 7, 37, 66, 67, 68,72, 97, 252, 253, 463, 475, 374, 
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
  * 119: Statue (temporaire)
  */
-var tileToTalk = [119];
+var tileToTalk = [119, 120];
 
 /**
  * Lorsque le HTML est chargé,
@@ -99,16 +99,17 @@ function Dessiner() {
     //on dessine le joueur
     ctx.drawImage(player.sprite,player.x[player.regard],player.y[player.regard],player.width,player.height,player.position_x*tiles_dimension,player.position_y*tiles_dimension-player.height+tiles_dimension,player.width,player.height);
     if(map.id == 3 ||map.id == 6){
-        drawAllo(player.position_x,player.position_y);
+        drawHalo(player.position_x,player.position_y);
     }
 }
 
-function drawAllo(x,y){
+function drawHalo(x, y){
+    var halo = document.getElementById("halo");
+
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
-    var img = new Image();
-    img.src = "img/allo.png";
-    ctx.drawImage(img,x*30-500,y*30-500);
+
+    ctx.drawImage(halo,x*30-500,y*30-500);
 }
 
 
@@ -309,7 +310,7 @@ function mapLeft(id) {
  * @param id de la map actuelle
  */
 function mapTop(id) {
-    drawAllo(player.position_x,player.position_y);
+    drawHalo(player.position_x,player.position_y);
     switch(id) {
         case 1:
             if(true) { //haveTorch && haveCompass
@@ -368,6 +369,9 @@ function startToTalk(idPnj) {
             //launchMonkeyQuest();
             launchTorchQuest();
             break;
+        case 120:
+            launchCompassQuest();
+            break;
     }
 }
 
@@ -376,9 +380,7 @@ function startToTalk(idPnj) {
  * Affiche la box de dialogue, lance le texte et affiche la fenetre de minijeu
  */
 function launchTorchQuest() {
-    $(".box").show();
-
-    showText("Tortue géniale", "Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
+    showTextAndLaunchQuest("Tortue géniale", "Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
         "Une ... Une légende raconte qu'il y a un terrible dragon derrière cette montagne... Je crains le pire..." +
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
         "Je dois avoir une torche dans ce coffre, essaye de la trouver. /" +
@@ -390,12 +392,7 @@ function launchTorchQuest() {
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    // $(".box").show();
-    //
-    // Speak("Simon", "Bonjour jeune princesse ! Que fais-tu dans cette foret ? \n" +
-    //     "Tu veux un conseil pour te diriger dans la grotte ? Le mieux serait d'avoir cette boussole ! \n" +
-    //     "Mmh... Je suis prêt à te la donner seulement si tu réussis mon petit jeu. \n" +
-    //     "Essaye de retenir les combinaisons et de les reproduire. C'est parti !");
+    showTextAndLaunchQuest("Simon", "Elle est ou Jeanne ? /",0, 2);
 }
 
 /**
@@ -406,7 +403,9 @@ function launchCompassQuest() {
  * @param index: Mettre à 0 (Utilisé pour la récursivité)
  * @param questId: Id de la quête à afficher à la fin du dialogue
  */
-var showText = function (pnj, message, index, questId) {
+var showTextAndLaunchQuest = function (pnj, message, index, questId) {
+    $(".box").show();
+
     if (index < message.length) {
         $("#name").html(pnj);
 
@@ -417,9 +416,32 @@ var showText = function (pnj, message, index, questId) {
             $("#message").append(message[index++]);
         }
 
-        setTimeout(function () { showText(pnj, message, index, questId); }, 50);
+        setTimeout(function () { showTextAndLaunchQuest(pnj, message, index, questId); }, 50);
     } else {
+        $(".box").hide();
         showScreenQuest(questId);
+    }
+}
+
+/**
+ * Affiche du dialogue.
+ */
+var showText = function (pnj, message, index) {
+    $(".box").show();
+
+    if (index < message.length) {
+        $("#name").html(pnj);
+
+        if(message[index] === "/") {
+            $("#message").html("");
+            index++;
+        } else {
+            $("#message").append(message[index++]);
+        }
+
+        setTimeout(function () { showTextAndLaunchQuest(pnj, message, index); }, 50);
+    } else {
+        $(".box").hide();
     }
 }
 
@@ -432,12 +454,15 @@ var showText = function (pnj, message, index, questId) {
  * @param questId
  */
 function showScreenQuest(questId) {
-    $(".box").hide();
-
     switch(questId) {
         case 1:
             $("#myCanvas").hide();
             $("#divTorchQuest").show();
+        case 2:
+            $("#myCanvas").hide();
+            $("#divCompassQuest").show();
+
+            launchDialog(iteration);
         default:
             return;
     }
