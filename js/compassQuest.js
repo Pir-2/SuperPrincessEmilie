@@ -1,6 +1,5 @@
 var serverCombination = [];
 var speed = 800;
-var iteration = 3;
 /**
  * Tableau contenant les boutons et leur couleur temporaire respective
  */
@@ -12,21 +11,29 @@ buttonTab[3] = new Array("blueButton", "#6690fe");
 
 
 
-function launchDialog(iter) {
-    iteration = iter;
+function launchDialog(iteration) {
     if(iteration === 3) {
-        showText("Simon", "Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prêtes ? C'est parti ! /",0, 2);
-        setTimeout(startPhase, 6000);
+        showText("Simon", "/ Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prêtes ? C'est parti !",0);
+
+        setTimeout(function() {
+            startPhase(800, 3);
+        }, 6000)
     } else if (iteration == 4) {
-        showText("Simon", "Tu es forte ! Et si je vais plus vite ? /",0, 2);
-        setTimeout(startPhase, 3000);
+        showText("Simon", "/ Tu es forte ! Et si je vais plus vite ?",0);
+
+        setTimeout(function() {
+            startPhase(700, 4);
+        }, 4000)
     } else {
-        showText("Impressionnant ! Et si je tape encore plus vite ? /",0, 2);
-        setTimeout(startPhase, 3000);
+        showText("Simon", "/ Impressionnant ! Et si je tape encore plus vite ?",0);
+
+        setTimeout(function() {
+            startPhase(600, 5);
+        }, 4000)
     }
 }
 
-function startPhase() {
+function startPhase(speed, iteration) {
     setTimeout(function () {
         if(iteration > 0) {
             var number = Math.floor(Math.random() * 3) + 0;
@@ -71,15 +78,20 @@ function hexc(colorval) {
 }
 
 function playerTurn() {
-
+    showText("Simon", "/ A toi de jouer !",0);
 }
 
 var clickCount = 0;
 
 $(document).ready(function() {
+    var iteration = 3;
     $(".buttonGame").click(function() {
         if(serverCombination[clickCount] != this.id) {
-            alert("PERDU !");
+            showText("Simon", "/ Perdu ! Reviens me voir quand tu auras le rythme dans la peau!",0);
+
+            $("#myCanvas").show();
+            $("#divCompassQuest").hide();
+            return;
         }
 
         clickCount++;
@@ -90,11 +102,15 @@ $(document).ready(function() {
                 iteration++;
 
                 launchDialog(iteration);
-                startPhase(speed-100, iteration);
             } else {
-                alert("INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
+                showText("Simon", "/ INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
                     "J'ai entendu dire que tu souhaitais traverser la grotte.. Voila qui devrait t'aider ! " +
-                    "Vous avez obtenu la BOUSSOLE !");
+                    "Vous avez obtenu la BOUSSOLE !",0);
+
+                haveCompass = true;
+
+                $("#myCanvas").show();
+                $("#divCompassQuest").hide();
             }
         }
     });
