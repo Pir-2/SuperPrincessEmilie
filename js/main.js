@@ -100,9 +100,8 @@ function drawHalo(x, y){
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
 
-    ctx.drawImage(halo,x*30-500,y*30-500);
+    ctx.drawImage(halo,x*30-1450,y*30-1450);
 }
-
 
 /**
  * Gère les mouvements du personnage
@@ -233,7 +232,6 @@ function khandle(e) {
     Dessiner();
 }
 
-
 /**
  * Permet de rentrer dans la maison. ATTENTION CHARGE TOUJOURS LE MÊME INTERIEUR
  * Les paramètres permettent de ressortir de la maison
@@ -300,6 +298,7 @@ function mapLeft(id) {
             break;
         case 3:
             sonDebut();
+            launchLightDown();
             map = new Map(4);
             player.position_x = 19;
             break;
@@ -322,7 +321,7 @@ function mapTop(id) {
             if(true) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
-                player.position_y = 19;
+                player.position_y = 1;//19
                 break;
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
@@ -401,6 +400,12 @@ function launchTorchQuest() {
 function launchCompassQuest() {
     showTextAndLaunchQuest("Simon", "Elle est ou Jeanne ? /",0, 2);
 }
+/**
+ * lance l'extinction de la torche
+ */
+function launchLightDown(){
+    showTextAndLaunchQuest("","Souffler pour éteindre la torche. /",0, 3);
+}
 
 /**
  * Fonction de dialogue
@@ -473,8 +478,10 @@ function showScreenQuest(questId) {
         case 2:
             $("#myCanvas").hide();
             $("#divCompassQuest").show();
-
             launchDialog(3);
+        case 3:
+            $("#myCanvas").hide();
+            $("#divLightDown").show();
         default:
             return;
     }
