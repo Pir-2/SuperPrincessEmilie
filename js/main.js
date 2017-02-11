@@ -8,6 +8,35 @@ var tileset_x = new Array();
 //position y de la tile en fonction de son numéro
 var tileset_y = new Array();
 
+var imgVieEmilie = new Image();
+imgVieEmilie.src = "img/QTE/lifeBar/EmilieLife.png";
+
+var imgVieDragon = new Image();
+imgVieDragon.src = "img/QTE/lifeBar/DragonLife.png";
+
+var imgFond = new Image();
+imgFond.src = "img/QTE/fondQTE.jpg";
+
+var imgEmilie = new Image();
+imgEmilie.src = "img/QTE/Princess.png";
+
+var imgDragon = new Image();
+imgDragon.src = "img/QTE/Dragon.png";
+
+var imgHaut = new Image();
+imgHaut.src ="img/QTE/Arrows/arrowKeys_Up.png";
+
+var imgBas = new Image();
+imgBas.src ="img/QTE/Arrows/arrowKeys_Down.png";
+
+var imgGauche = new Image();
+imgGauche.src ="img/QTE/Arrows/arrowKeys_Left.png";
+
+var imgDroite = new Image();
+imgDroite.src ="img/QTE/Arrows/arrowKeys_Right.png";
+
+var arrows =[imgHaut,imgBas,imgGauche,imgDroite];
+
 var player = null;
 
 /**
@@ -24,7 +53,7 @@ var haveCompass = false;
 /**
  * Saisir dans ce tableau l'id des tiles ou le personnage peut se déplacer.
  */
-var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46];
+var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46,17];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
@@ -41,7 +70,7 @@ var tileToTalk = [56, 47, 48, 49, 57, 58, 59, 67, 68, 69];
 $(document).ready(function() {
     initTileSet();
     //ICI
-    map = new Map(5);
+    map = new Map(4);
 
     player = new Player();
 
@@ -322,7 +351,7 @@ function mapTop(id) {
             if(true) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
-                player.position_y = 19;//19
+                player.position_y = 1;//19
                 break;
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
@@ -379,7 +408,38 @@ function startToTalk(idPnj) {
         case 56:
             launchCompassQuest();
             break;
+        case 47:
+            launchDragonFight();
+            break;
+        case 48:
+            launchDragonFight();
+            break;
+        case 49:
+            launchDragonFight();
+            break;
+        case 57:
+            launchDragonFight();
+            break;
+        case 58:
+            launchDragonFight();
+            break;
+        case 59:
+            launchDragonFight();
+            break;
+        case 67:
+            launchDragonFight();
+            break;
+        case 68:
+            launchDragonFight();
+            break;
+        case 69:
+            launchDragonFight();
+            break;
     }
+}
+
+function launchDragonFight(){
+    showTextAndLaunchQuest("Dragon", "Tu viens pour récupérer ton prince! Mais il faudra d'abord me vaincre! /",0, 4);
 }
 
 /**
@@ -486,6 +546,13 @@ function showScreenQuest(questId) {
             $("#sortie").show();
             $("#torche").show();
             microphoneSound();
+        case 4:
+            $("#myCanvas").hide();
+            $("#canvasFightDragon").show();
+            $("#EmilieLife").show();
+            $("#DragonLife").show();
+            fight();
+            lanceQTE();
         default:
             return;
     }

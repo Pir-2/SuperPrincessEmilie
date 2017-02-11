@@ -12,6 +12,7 @@
     <script src="js/torchQuest.js"></script>
     <script src="js/lightdown.js"></script>
     <script src="js/compassQuest.js"></script>
+    <script src="js/fightDragon.js"></script>
 
     <script src="soundmanager/script/soundmanager2.js"></script>
 
@@ -32,11 +33,16 @@
         <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML5 canvas tag.
         </canvas>
-
-        <canvas id="qteCanvas" width="1100" height="700" style="border:1px solid #d3d3d3;" hidden>
+        <!--QTE-->
+        <canvas id="canvasFightDragon" width="1100" height="550" hidden>
             Your browser does not support the HTML5 canvas tag.
         </canvas>
-
+        <canvas id="EmilieLife" width="550" height="250" hidden>
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <canvas id="DragonLife" width="550" height="250" hidden>
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
         <!--!!! Une div par quete !!!-->
         <div id="divTorchQuest" width="1100" height="700">
             <div id="coffre">
@@ -71,10 +77,6 @@
             <img class="hiddenImg" src="img/compassQuest/fond5.png"/>
             <img class="hiddenImg" src="img/compassQuest/fond6.png"/>
             <img class="hiddenImg" src="img/compassQuest/fond7.png"/>
-        </div>
-
-        <div id="divFightDragon" width="1100" height="700">
-            <!--Mettre les conteneurs nécessaires-->
         </div>
 
         <!--Boite de dialogue-->

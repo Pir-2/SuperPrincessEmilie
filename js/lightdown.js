@@ -25,7 +25,7 @@ function microphoneSound(){
                             setTimeout(function(){
                                 $("#divLightDown").hide();
                                 $("#myCanvas").show();
-                                showText("","Bravo ! Tu peux continuer.",0);
+                                showText("","Bravo ! Tu peux continuer. /",0);
                             },1000);
                             break;
                         }
