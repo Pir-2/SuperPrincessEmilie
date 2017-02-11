@@ -315,7 +315,7 @@ function mapTop(id) {
             if(true) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
-                player.position_y = 1;//19
+                player.position_y = 19;//19
                 break;
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
@@ -398,7 +398,7 @@ function launchCompassQuest() {
  * lance l'extinction de la torche
  */
 function launchLightDown(){
-    showTextAndLaunchQuest("","Souffler pour éteindre la torche. /",0, 3);
+    showTextAndLaunchQuest("","Souffle pour éteindre la torche. /",0, 3);
 }
 
 /**
@@ -476,6 +476,9 @@ function showScreenQuest(questId) {
         case 3:
             $("#myCanvas").hide();
             $("#divLightDown").show();
+            $("#sortie").show();
+            $("#torche").show();
+            microphoneSound();
         default:
             return;
     }
@@ -487,12 +490,12 @@ function sonButton(){
     soundManager.play('boutton','sound/Button.mp3');
 }
 function sonGrotte(){
-    soundManager.url = 'swf/';
+    /*soundManager.url = 'swf/';
     soundManager.debugMode = true;
-    soundManager.play('Fond','sound/grotte.mp3');
+    soundManager.play('Fond','sound/grotte.mp3');*/
 }
 function sonDebut(){
-    soundManager.url = 'swf/';
+    /*soundManager.url = 'swf/';
     soundManager.debugMode = true;
-    soundManager.play('Fond','sound/village.mp3');
+    soundManager.play('Fond','sound/village.mp3');*/
 }
