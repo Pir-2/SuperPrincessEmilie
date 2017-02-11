@@ -24,7 +24,7 @@ var haveCompass = false;
 /**
  * Saisir dans ce tableau l'id des tiles ou le personnage peut se déplacer.
  */
-var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 17, 38, 39, 46];
+var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
@@ -300,6 +300,7 @@ function mapLeft(id) {
             sonDebut();
             launchLightDown();
             map = new Map(4);
+            tileAvailable.push(17);
             player.position_x = 19;
             break;
         case 5:
