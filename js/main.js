@@ -1,7 +1,7 @@
 var map = null;
 var tileset = null;
 var tiles_dimension = 32;
-var tileset_width = 30;
+var tileset_width = 10;
 var tileset_height = 16;
 //position x de la tile en fonction de son numéro
 var tileset_x = new Array();
@@ -23,21 +23,13 @@ var haveCompass = false;
 
 /**
  * Saisir dans ce tableau l'id des tiles ou le personnage peut se déplacer.
- * 37: Chemin avec herbe en haut
- * 66: Chemin avec herbe à gauche
- * 67: Chemin
- * 68: Chemin avec herbe à droite
- * 72: Plancher de maison
- * 97: Chemin avec herve en bas
- * 463: Porte ouverte (Tile à modifier)
  */
-var tileAvailable = [270, 8, 7, 37, 66, 67, 68,72, 97, 252, 253, 463, 475, 374, 445];
+var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 17, 38, 39, 46];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
- * 119: Statue (temporaire)
  */
-var tileToTalk = [119, 120];
+var tileToTalk = [56, 47, 48, 49, 57, 58, 59, 67, 68, 69];
 
 /**
  * Lorsque le HTML est chargé,
@@ -48,8 +40,8 @@ var tileToTalk = [119, 120];
  */
 $(document).ready(function() {
     initTileSet();
-
-    map = new Map(0);
+    //ICI
+    map = new Map(5);
 
     player = new Player();
 
@@ -218,22 +210,22 @@ function khandle(e) {
     /**
      * bouton dans la première map de labyrinthe
      */
-    if((map.map[player.position_y][player.position_x]) == 374){
+    if((map.map[player.position_y][player.position_x]) == 46){
         if(map.id == 3){
             if(player.position_y == 5 && player.position_x == 1){
-                map.map[10][10] = 67;
+                map.map[10][10] = 3;
             }
             else{
-                map.map[2][13] = 67;
-                map.map[3][13] = 67;
+                map.map[2][13] = 3;
+                map.map[3][13] = 3;
             }
             sonButton();
         }
     }
-    else if((map.map[player.position_y][player.position_x]) == 475){
+    else if((map.map[player.position_y][player.position_x]) == 39){
         mapLevelInf(map.id);
     }
-    else if((map.map[player.position_y][player.position_x]) == 445){
+    else if((map.map[player.position_y][player.position_x]) == 38){
         mapLevelUp(map.id);
     }
 
@@ -269,14 +261,21 @@ function mapRight(id) {
         case 2:
             map = new Map(0);
             player.position_x = 0;
+            player.position_y = 12;
             break;
         case 0:
             map = new Map(1);
             player.position_x = 0;
+            player.position_y = 8;
             break;
         case 4:
             map = new Map(3);
             player.position_x = 0;
+            break;
+        case 1:
+            map = new Map(5);
+            player.position_x = 0;
+            player.position_y = 8;
             break;
     }
 }
@@ -290,15 +289,22 @@ function mapLeft(id) {
         case 1:
             map = new Map(0);
             player.position_x = 19;
+            player.position_y = 12;
             break;
         case 0:
             map = new Map(2);
             player.position_x = 19;
+            player.position_y = 8;
             break;
         case 3:
             sonDebut();
             launchLightDown();
             map = new Map(4);
+            player.position_x = 19;
+            break;
+        case 5:
+            sonDebut();
+            map = new Map(1);
             player.position_x = 19;
             break;
     }
@@ -311,7 +317,7 @@ function mapLeft(id) {
 function mapTop(id) {
     drawHalo(player.position_x,player.position_y);
     switch(id) {
-        case 1:
+        case 5:
             if(true) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
@@ -329,7 +335,7 @@ function mapTop(id) {
 function mapBottom(id) {
     switch(id) {
         case 3:
-            map = new Map(1);
+            map = new Map(5);
             player.position_y = 0;
             break;
     }
@@ -369,7 +375,7 @@ function startToTalk(idPnj) {
             //launchMonkeyQuest();
             launchTorchQuest();
             break;
-        case 120:
+        case 56:
             launchCompassQuest();
             break;
     }
