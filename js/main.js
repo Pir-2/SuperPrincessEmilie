@@ -53,7 +53,7 @@ var haveCompass = false;
 /**
  * Saisir dans ce tableau l'id des tiles ou le personnage peut se déplacer.
  */
-var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46,17];
+var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
@@ -70,7 +70,7 @@ var tileToTalk = [56, 47, 48, 49, 57, 58, 59, 67, 68, 69];
 $(document).ready(function() {
     initTileSet();
     //ICI
-    map = new Map(4);
+    map = new Map(0);
 
     player = new Player();
 
@@ -299,6 +299,7 @@ function mapRight(id) {
             break;
         case 4:
             map = new Map(3);
+            tileAvailable.splice(tileAvailable.length -1, 1);
             player.position_x = 0;
             break;
         case 1:
@@ -536,16 +537,19 @@ function showScreenQuest(questId) {
         case 1:
             $("#myCanvas").hide();
             $("#divTorchQuest").show();
+            break;
         case 2:
             $("#myCanvas").hide();
             $("#divCompassQuest").show();
             launchDialog(3);
+            break;
         case 3:
             $("#myCanvas").hide();
             $("#divLightDown").show();
             $("#sortie").show();
             $("#torche").show();
             microphoneSound();
+            break;
         case 4:
             $("#myCanvas").hide();
             $("#canvasFightDragon").show();
@@ -553,6 +557,7 @@ function showScreenQuest(questId) {
             $("#DragonLife").show();
             fight();
             lanceQTE();
+            break;
         default:
             return;
     }
