@@ -2,6 +2,13 @@ var kH = false;
 var kG = false;
 var kD = false;
 var kB = false;
+var maj = false;
+
+var talking = false;
+var quest = false;
+
+var vitessemax = 60;
+var vitesemin = 20;
 
 var map = null;
 var tileset = null;
@@ -145,7 +152,16 @@ function drawHalo(x, y){
 function khandle(e) {
     e = e || event;
     var evt = e.type;
-
+	
+    maj = !!e.shiftKey;
+	if(maj)
+	{
+		player.vitesse=vitesemin;
+	}
+	else
+	{
+		player.vitesse=vitessemax;
+	}
     //haut
     if(e.keyCode === 38)
     {
@@ -181,28 +197,30 @@ function khandle(e) {
     }
 
     //Espace
-    if(e.keyCode === 32)
-    {
-        switch(player.regard) {
-            case 10:
-                if(tileToTalk.includes(map.map[player.position_y-1][player.position_x])) {
-                    startToTalk(map.map[player.position_y-1][player.position_x]);
-                } break;
-            case 4:
-                if(tileToTalk.includes(map.map[player.position_y][player.position_x-1])) {
-                    startToTalk(map.map[player.position_y][player.position_x-1]);
-                } break;
-            case 1:
-                if(tileToTalk.includes(map.map[player.position_y+1][player.position_x])) {
-                    startToTalk(map.map[player.position_y+1][player.position_x]);
-                } break;
-            case 7:
-                if(tileToTalk.includes(map.map[player.position_y][player.position_x+1])) {
-                    startToTalk(map.map[player.position_y][player.position_x+1]);
-                } break;
-        }
-    }
-
+	if(e.keyCode === 32)
+	{
+		if(!talking && !quest)
+		{
+		switch(player.regard) {
+			case 10:
+				if(tileToTalk.includes(map.map[player.position_y-1][player.position_x])) {
+					startToTalk(map.map[player.position_y-1][player.position_x]);
+				} break;
+			case 4:
+				if(tileToTalk.includes(map.map[player.position_y][player.position_x-1])) {
+					startToTalk(map.map[player.position_y][player.position_x-1]);
+				} break;
+			case 1:
+				if(tileToTalk.includes(map.map[player.position_y+1][player.position_x])) {
+					startToTalk(map.map[player.position_y+1][player.position_x]);
+				} break;
+			case 7:
+				if(tileToTalk.includes(map.map[player.position_y][player.position_x+1])) {
+					startToTalk(map.map[player.position_y][player.position_x+1]);
+				} break;
+			}
+		}
+	}
     //Ferme la discussion avec le singe (TEST)
     if(e.keyCode === 27)
     {
@@ -281,9 +299,12 @@ function khandle2(e)
  */
 function enterHouse(mapId, xDoor, yDoor) {
     coordDoor = [mapId, xDoor, yDoor];
-    map = new Map(5);
-    player.position_x = 9;
-    player.position_y = 15;
+
+    if(xDoor === 9) {
+        map = new Map(7);
+        player.position_x = 9;
+        player.position_y = 15;
+    }
 }
 
 function leaveHouse() {
@@ -410,8 +431,10 @@ function mapLevelUp(id){
  * Recherche le PNJ et lance la discussion correspondant
  * @param idPnj
  */
-function startToTalk(idPnj) {
-    switch(idPnj) {
+function startToTalk(idPnj) 
+{
+    switch(idPnj) 
+	{
         case 119:
             //launchMonkeyQuest();
             launchTorchQuest();
@@ -488,6 +511,7 @@ function launchLightDown(){
  * @param questId: Id de la quête à afficher à la fin du dialogue
  */
 var showTextAndLaunchQuest = function (pnj, message, index, questId) {
+	talking = true;
     $(".box").show();
 
     if (index < message.length) {
@@ -502,6 +526,8 @@ var showTextAndLaunchQuest = function (pnj, message, index, questId) {
 
         setTimeout(function () { showTextAndLaunchQuest(pnj, message, index, questId); }, 50);
     } else {
+	//quest=true;
+	talking=false;
         setTimeout(function () {
             $(".box").hide();
         }, 800);
@@ -513,6 +539,7 @@ var showTextAndLaunchQuest = function (pnj, message, index, questId) {
  * Affiche du dialogue.
  */
 var showText = function (pnj, message, index) {
+	talking = true;
     $(".box").show();
 
     if (index < message.length) {
@@ -527,6 +554,7 @@ var showText = function (pnj, message, index) {
 
         setTimeout(function () { showTextAndLaunchQuest(pnj, message, index); }, 50);
     } else {
+		talking = false;
         setTimeout(function () {
             $(".box").hide();
         }, 800);
@@ -542,7 +570,8 @@ var showText = function (pnj, message, index) {
  * 3: Combat contre le dragon
  * @param questId
  */
-function showScreenQuest(questId) {
+function showScreenQuest(questId) 
+{
     switch(questId) {
         case 1:
             $("#myCanvas").hide();

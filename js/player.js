@@ -1,7 +1,7 @@
 function Player() {
     //position du joueur sur la map
-    this.position_x = 8; //Position de départ
-    this.position_y = 8;
+    this.position_x = 9; //Position de départ
+    this.position_y = 7;
 
     /*
      * ===========Gestion du sprite========
@@ -25,7 +25,7 @@ function Player() {
     this.x = new Array(0,this.width,2*this.width,0,this.width,2*this.width,0,this.width,2*this.width,0,this.width,2*this.width);
     this.y = new Array(0,0,0,this.height,this.height,this.height,this.height*2,this.height*2,this.height*2,this.height*3,this.height*3,this.height*3);
     this.mouvement = false;
-    this.vitesse=50;
+    this.vitesse=vitessemax;
 }
 
 function AnimationHaut()
@@ -34,7 +34,7 @@ function AnimationHaut()
     if (player.position_y > 0) {
         if (tileAvailable.includes(map.map[player.position_y - 1][player.position_x]))
         {
-            if (map.map[player.position_y - 1][player.position_x] === 463)
+            if (map.map[player.position_y - 1][player.position_x] === 7)
             {
                 enterHouse(map.id, player.position_x, player.position_y - 1);
             }

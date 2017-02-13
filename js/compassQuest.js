@@ -12,6 +12,7 @@ buttonTab[3] = new Array("blueButton", "#6690fe");
 
 
 function launchDialog(iteration) {
+	quest=true;
     if(iteration === 3) {
         showText("Simon", "/ Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prêtes ? C'est parti !",0);
 
@@ -89,6 +90,7 @@ $(document).ready(function() {
         if(serverCombination[clickCount] != this.id) {
             showText("Simon", "/ Perdu ! Reviens me voir quand tu auras le rythme dans la peau!",0);
 
+			quest = false;
             $("#myCanvas").show();
             $("#divCompassQuest").hide();
             return;
@@ -109,6 +111,7 @@ $(document).ready(function() {
 
                 haveCompass = true;
 
+				quest = false;
                 $("#myCanvas").show();
                 $("#divCompassQuest").hide();
             }
