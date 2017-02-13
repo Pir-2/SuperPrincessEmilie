@@ -1,3 +1,8 @@
+var kH = false;
+var kG = false;
+var kD = false;
+var kB = false;
+
 var map = null;
 var tileset = null;
 var tiles_dimension = 32;
@@ -77,7 +82,8 @@ $(document).ready(function() {
 
     Dessiner();
     sonDebut();
-    document.onkeydown = khandle
+    document.onkeydown = khandle;
+    document.onkeyup = khandle2;
 });
 
 /**
@@ -143,61 +149,34 @@ function khandle(e) {
     //haut
     if(e.keyCode === 38)
     {
-        player.regard=0;
-
-        if(player.position_y > 0) {
-            if(tileAvailable.includes(map.map[player.position_y-1][player.position_x])) {
-                if(map.map[player.position_y-1][player.position_x] === 463) {
-                    enterHouse(map.id, player.position_x, player.position_y-1);
-                }
-               player.position_y--;
-            }
-        } else {
-            mapTop(map.id)
+        kH=true;
+        if(!player.mouvement)
+        {
+            AnimationHaut();
         }
     }
     //gauche
     if(e.keyCode === 37)
     {
-        player.regard=1;
-
-        if(tileAvailable.includes(map.map[player.position_y][player.position_x-1])) {
-            if(player.position_x>0)player.position_x--;
-        } else {
-            if(player.position_x === 0) {
-                //Changement de map
-                mapLeft(map.id)
-            }
+        kG=true;
+        if(!player.mouvement) {
+            AnimationGauche();
         }
     }
     //bas
     if(e.keyCode === 40)
     {
-        player.regard=2;
-        if(player.position_y < 19){
-            if(tileAvailable.includes(map.map[player.position_y+1][player.position_x])) {
-                if(map.map[player.position_y+1][player.position_x] === 463) {
-                    leaveHouse();
-                }
-                if(player.position_y<map.hauteur-1)player.position_y++;
-            }
-        }
-        else{
-            mapBottom(map.id);
+        kB=true;
+        if(!player.mouvement) {
+            AnimationBas();
         }
     }
     //droite
     if(e.keyCode === 39)
     {
-        player.regard=3;
-
-        if(tileAvailable.includes(map.map[player.position_y][player.position_x+1])) {
-            player.position_x++;
-        } else {
-            if(player.position_x === map.largeur-1) {
-                //Changement de map
-                mapRight(map.id)
-            }
+        kD=true;
+        if(!player.mouvement) {
+            AnimationDroite();
         }
     }
 
@@ -205,19 +184,19 @@ function khandle(e) {
     if(e.keyCode === 32)
     {
         switch(player.regard) {
-            case 0:
+            case 10:
                 if(tileToTalk.includes(map.map[player.position_y-1][player.position_x])) {
                     startToTalk(map.map[player.position_y-1][player.position_x]);
                 } break;
-            case 1:
+            case 4:
                 if(tileToTalk.includes(map.map[player.position_y][player.position_x-1])) {
                     startToTalk(map.map[player.position_y][player.position_x-1]);
                 } break;
-            case 2:
+            case 1:
                 if(tileToTalk.includes(map.map[player.position_y+1][player.position_x])) {
                     startToTalk(map.map[player.position_y+1][player.position_x]);
                 } break;
-            case 3:
+            case 7:
                 if(tileToTalk.includes(map.map[player.position_y][player.position_x+1])) {
                     startToTalk(map.map[player.position_y][player.position_x+1]);
                 } break;
@@ -258,7 +237,39 @@ function khandle(e) {
         mapLevelUp(map.id);
     }
 
-    Dessiner();
+    //Dessiner();
+}
+
+/**
+ * Gère les mouvements du personnage
+ * @param e
+ */
+function khandle2(e)
+{
+    e = e || event;
+    var evt = e.type;
+
+    //haut
+    if(e.keyCode === 38)
+    {
+        kH=false;
+    }
+    //gauche
+    if(e.keyCode === 37)
+    {
+        kG=false;
+    }
+    //bas
+    if(e.keyCode === 40)
+    {
+        kB=false;
+    }
+    //droite
+    if(e.keyCode === 39)
+    {
+        kD=false;
+    }
+
 }
 
 /**
@@ -357,7 +368,6 @@ function mapTop(id) {
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
                     "C'est trop dangereux sans des équipements pour te repérer !");
-                player.regard=2;
                 player.position_y++;
             }
     }
