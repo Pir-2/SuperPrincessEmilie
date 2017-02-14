@@ -254,8 +254,6 @@ function khandle(e) {
     else if((map.map[player.position_y][player.position_x]) == 38){
         mapLevelUp(map.id);
     }
-
-    //Dessiner();
 }
 
 /**
