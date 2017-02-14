@@ -1,5 +1,14 @@
 ﻿document.getElementById("itemTorch").addEventListener("click",function(){
-    alert( "Trouvé !" );
+
+    showText("Vieil homme", "/ Bien vu ! j'étais convaincu que tu réussirais à trouver la torche !" +
+        " Elle te sera très utile dans la grotte, mais n'oublie pas de l'éteindre après t'en être servi. " +
+        "/ Vous avez obtenu la TORCHE !",0);
+    haveTorch = true;
+
+    sonItemFound();
+
+    $("#divTorchQuest").hide();
+    $("#myCanvas").show();
     $("#torcheInventaire").show();
 });
 

@@ -116,6 +116,7 @@ $(document).ready(function() {
 				quest = false;
                 $("#myCanvas").show();
                 $("#divCompassQuest").hide();
+                sonItemFound();
                 $("#boussoleInventaire").show();
             }
         }

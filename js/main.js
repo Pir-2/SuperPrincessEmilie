@@ -330,6 +330,7 @@ function leaveHouse() {
 function mapRight(id) {
     switch(id) {
         case 2:
+            sonDebut();
             map = new Map(0);
             player.position_x = 0;
             player.position_y = 12;
@@ -345,6 +346,7 @@ function mapRight(id) {
             player.position_x = 0;
             break;
         case 1:
+            sonEntreeGrotte();
             map = new Map(5);
             player.position_x = 0;
             player.position_y = 8;
@@ -364,12 +366,12 @@ function mapLeft(id) {
             player.position_y = 12;
             break;
         case 0:
+            sonBois();
             map = new Map(2);
             player.position_x = 19;
             player.position_y = 8;
             break;
         case 3:
-            sonDebut();
             launchLightDown();
             map = new Map(4);
             tileAvailable.push(17);
@@ -407,6 +409,7 @@ function mapTop(id) {
 function mapBottom(id) {
     switch(id) {
         case 3:
+            sonEntreeGrotte();
             map = new Map(5);
             player.position_y = 0;
             break;
@@ -483,6 +486,7 @@ function startToTalk(idPnj)
 }
 
 function launchDragonFight(){
+    sonBoss();
     showTextAndLaunchQuest("Dragon", "/ Tu viens pour récupérer ton prince! Mais il faudra d'abord me vaincre!",0, 4);
 }
 
@@ -491,7 +495,7 @@ function launchDragonFight(){
  * Affiche la box de dialogue, lance le texte et affiche la fenetre de minijeu
  */
 function launchTorchQuest() {
-    showTextAndLaunchQuest("Tortue géniale", "/ Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
+    showTextAndLaunchQuest("Vieil homme", "/ Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
         "Une ... Une légende raconte qu'il y a un terrible dragon derrière cette montagne... Je crains le pire..." +
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
         "Je dois avoir une torche dans ce coffre, essaye de la trouver." +
@@ -503,14 +507,14 @@ function launchTorchQuest() {
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    showTextAndLaunchQuest("Simon", "/ Tu auras besoin d'une boussole pour te repérer dans la grotte ! Gagne notre petit jeu" +
-        " et nous t'en donnerons une ! /",0, 2);
+    showTextAndLaunchQuest("Simon", "/ Bienvenue dans la forêt des singes joueurs ! Gagne notre petit jeu" +
+        " et nous te donnerons quelque chose d'utile ! /",0, 2);
 }
 /**
  * lance l'extinction de la torche
  */
 function launchLightDown(){
-    showTextAndLaunchQuest("","Souffle pour éteindre la torche. /",0, 3);
+    showTextAndLaunchQuest("","/ Souffle pour éteindre la torche. /",0, 3);
 }
 
 /**
@@ -619,20 +623,38 @@ function sonButton(){
     soundManager.play('boutton','sound/Button.mp3');
 }
 function sonGrotte(){
-    /*soundManager.url = 'swf/';
+    soundManager.url = 'swf/';
     soundManager.debugMode = true;
-    soundManager.play('Fond','sound/grotte.mp3');*/
+    soundManager.play('Fond','sound/grotte.mp3');
 }
 function sonDebut(){
-    /*soundManager.url = 'swf/';
+    soundManager.url = 'swf/';
     soundManager.debugMode = true;
-    soundManager.play('Fond','sound/village.mp3');*/
+    soundManager.play('Fond','sound/village.mp3');
 }
 
 function sonBois() {
-    /*soundManager.url = 'swf/';
+    soundManager.url = 'swf/';
      soundManager.debugMode = true;
-     soundManager.play('Fond','sound/woods.mp3');*/
+     soundManager.play('Fond','sound/woods.mp3');
+}
+
+function sonEntreeGrotte() {
+    soundManager.url = 'swf/';
+     soundManager.debugMode = true;
+     soundManager.play('Fond','sound/entreeGrotte.mp3');
+}
+
+function sonBoss() {
+    soundManager.url = 'swf/';
+    soundManager.debugMode = true;
+    soundManager.play('Fond','sound/boss.mp3');
+}
+
+function sonItemFound() {
+    soundManager.url = 'swf/';
+    soundManager.debugMode = true;
+    soundManager.play('itemFound','sound/itemFound.mp3');
 }
 
 chrono();
