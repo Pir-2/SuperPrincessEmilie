@@ -12,6 +12,7 @@ buttonTab[3] = new Array("blueButton", "#6690fe");
 
 
 function launchDialog(iteration) {
+	quest=true;
     if(iteration === 3) {
         showText("Simon", "/ Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prêtes ? C'est parti !",0);
 
@@ -79,6 +80,7 @@ function hexc(colorval) {
 
 function playerTurn() {
     showText("Simon", "/ A toi de jouer !",0);
+    $(".buttonGame").prop('disabled', false);
 }
 
 var clickCount = 0;
@@ -89,6 +91,7 @@ $(document).ready(function() {
         if(serverCombination[clickCount] != this.id) {
             showText("Simon", "/ Perdu ! Reviens me voir quand tu auras le rythme dans la peau!",0);
 
+			quest = false;
             $("#myCanvas").show();
             $("#divCompassQuest").hide();
             return;
@@ -102,6 +105,7 @@ $(document).ready(function() {
                 iteration++;
 
                 launchDialog(iteration);
+                $(".buttonGame").prop('disabled', true);
             } else {
                 showText("Simon", "/ INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
                     "J'ai entendu dire que tu souhaitais traverser la grotte.. Voila qui devrait t'aider ! " +
@@ -109,6 +113,7 @@ $(document).ready(function() {
 
                 haveCompass = true;
 
+				quest = false;
                 $("#myCanvas").show();
                 $("#divCompassQuest").hide();
             }
