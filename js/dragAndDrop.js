@@ -1,4 +1,7 @@
-﻿document.getElementById("itemTorch").addEventListener("click",function(){alert( "Trouvé !" );});
+﻿document.getElementById("itemTorch").addEventListener("click",function(){
+    alert( "Trouvé !" );
+    $("#torcheInventaire").show();
+});
 
     (function() {
         var dndHandler = {
