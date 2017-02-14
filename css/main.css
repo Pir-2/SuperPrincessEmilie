@@ -3,12 +3,14 @@ html {
 }
 
 #mainZone {
+    background-image:url(../img/background.jpg);
+    background-repeat: no-repeat;
     position: relative;
     margin-left: auto;
     margin-right: auto;
 
     width: 1200px;
-    height: 641px;
+    height: 700px;
 
 }
 
@@ -16,6 +18,7 @@ html {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
+    top: 25px;
     left: 0;
     right: 0;
 }
@@ -48,3 +51,26 @@ html {
 #message {
      margin:5px;
  }
+
+#chrono {
+    position: absolute;
+    right: 20px;
+}
+
+#inventaire {
+    position: absolute;
+    left: 30px;
+}
+
+#torcheInventaire {
+    position: absolute;
+    top: 100px;
+    display: none;
+}
+
+#boussoleInventaire {
+    position: absolute;
+    top: 350px;
+    left: 50px;
+    display: none;
+}

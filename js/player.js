@@ -153,7 +153,7 @@ function AnimationBas()
     {
         if (tileAvailable.includes(map.map[player.position_y + 1][player.position_x]))
         {
-            if (map.map[player.position_y + 1][player.position_x] === 463)
+            if (map.map[player.position_y + 1][player.position_x] === 6)
             {
                 leaveHouse();
             }

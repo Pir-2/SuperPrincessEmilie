@@ -1,3 +1,7 @@
+var centi=0 // initialise les dixtièmes
+var secon=0 //initialise les secondes
+var minu=0 //initialise les minutes
+
 var kH = false;
 var kG = false;
 var kD = false;
@@ -302,6 +306,14 @@ function enterHouse(mapId, xDoor, yDoor) {
         map = new Map(7);
         player.position_x = 9;
         player.position_y = 15;
+    } else if (xDoor === 4) {
+        map = new Map(8);
+        player.position_x = 9;
+        player.position_y = 15;
+    } else if (xDoor === 13) {
+        map = new Map(9);
+        player.position_x = 9;
+        player.position_y = 15;
     }
 }
 
@@ -471,7 +483,7 @@ function startToTalk(idPnj)
 }
 
 function launchDragonFight(){
-    showTextAndLaunchQuest("Dragon", "Tu viens pour récupérer ton prince ... Mais il faudra d'abord me vaincre ! /",0, 4);
+    showTextAndLaunchQuest("Dragon", "/ Tu viens pour récupérer ton prince! Mais il faudra d'abord me vaincre!",0, 4);
 }
 
 /**
@@ -479,10 +491,10 @@ function launchDragonFight(){
  * Affiche la box de dialogue, lance le texte et affiche la fenetre de minijeu
  */
 function launchTorchQuest() {
-    showTextAndLaunchQuest("Vieil homme", "Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
+    showTextAndLaunchQuest("Tortue géniale", "/ Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
         "Une ... Une légende raconte qu'il y a un terrible dragon derrière cette montagne... Je crains le pire..." +
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
-        "Je dois avoir une torche dans ce coffre, essaye de la trouver. /" +
+        "Je dois avoir une torche dans ce coffre, essaye de la trouver." +
         "Pour trouver la torche, déplace le contenu du coffre de gauche dans celui de droite." +
         "Une fois que tu verras la torche, clique dessus. /", 0, 1);
 }
@@ -491,7 +503,7 @@ function launchTorchQuest() {
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    showTextAndLaunchQuest("Simon", "Tu auras besoin d'une boussole pour te repérer dans la grotte ! Gagne notre petit jeu" +
+    showTextAndLaunchQuest("Simon", "/ Tu auras besoin d'une boussole pour te repérer dans la grotte ! Gagne notre petit jeu" +
         " et nous t'en donnerons une ! /",0, 2);
 }
 /**
@@ -616,8 +628,26 @@ function sonDebut(){
     soundManager.debugMode = true;
     soundManager.play('Fond','sound/village.mp3');*/
 }
-function sonBois(){
+
+function sonBois() {
     /*soundManager.url = 'swf/';
      soundManager.debugMode = true;
      soundManager.play('Fond','sound/woods.mp3');*/
+}
+
+chrono();
+
+function chrono(){
+    centi++; //incrémentation des dixièmes de 1
+    if (centi>9){
+        centi=0;secon++
+    } //si les dixièmes > 9,
+    //on les réinitialise à 0 et on incrémente les secondes de 1
+    if (secon>59){
+        secon=0;minu++
+    }
+
+    setTimeout('chrono()',100);
+
+    $("#chrono").html("Temps : " + minu + " min, " + secon + " sec, " + centi);
 }
