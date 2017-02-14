@@ -140,7 +140,7 @@ function drawDescenteFleche(img, c, ctx, top, left, height){
             }
         }
         else if(lifeD <= 0){
-            alert("Vous avez gagner ! Vous allez être rediriger vers la page de score.");
+            alert("Vous avez terminé le jeu ! Une petite photo souvenir pour vous remémorer ce magnifique combat ?");
             document.location.href = "photo-finish.html";
         }
         else if(lifeE <= 0){

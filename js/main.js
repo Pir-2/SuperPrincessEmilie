@@ -473,7 +473,7 @@ function startToTalk(idPnj)
 }
 
 function launchDragonFight(){
-    showTextAndLaunchQuest("Dragon", "Tu viens pour récupérer ton prince! Mais il faudra d'abord me vaincre! /",0, 4);
+    showTextAndLaunchQuest("Dragon", "Tu viens pour récupérer ton prince ... Mais il faudra d'abord me vaincre ! /",0, 4);
 }
 
 /**
@@ -481,19 +481,20 @@ function launchDragonFight(){
  * Affiche la box de dialogue, lance le texte et affiche la fenetre de minijeu
  */
 function launchTorchQuest() {
-    showTextAndLaunchQuest("Tortue géniale", "Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
+    showTextAndLaunchQuest("Vieil homme", "Des marchands ont vu un groupe de bandits emmener le roi de l'autre côté de la montagne !" +
         "Une ... Une légende raconte qu'il y a un terrible dragon derrière cette montagne... Je crains le pire..." +
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
         "Je dois avoir une torche dans ce coffre, essaye de la trouver. /" +
         "Pour trouver la torche, déplace le contenu du coffre de gauche dans celui de droite." +
-        "Une fois que tu verras la torche, clique dessus.", 0, 1);
+        "Une fois que tu verras la torche, clique dessus. /", 0, 1);
 }
 
 /**
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    showTextAndLaunchQuest("Simon", "Elle est ou Jeanne ? /",0, 2);
+    showTextAndLaunchQuest("Simon", "Tu auras besoin d'une boussole pour te repérer dans la grotte ! Gagne notre petit jeu" +
+        " et nous t'en donnerons une ! /",0, 2);
 }
 /**
  * lance l'extinction de la torche
