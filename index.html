@@ -29,10 +29,18 @@
 
     <!--Zone contenant la carte du monde et les quêtes-->
     <div id="mainZone">
+        <h1 id="inventaire"> Mon inventaire </h1>
+
+        <img id="torcheInventaire" src="img/gameDragDrop/torch.png" />
+        <img id="boussoleInventaire" src="img/compassQuest/boussole.png" />
+
+        <p id="chrono"></p>
+
         <!--Carte du monde-->
         <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML5 canvas tag.
         </canvas>
+
         <!--QTE-->
         <canvas id="canvasFightDragon" width="1100" height="550" hidden>
             Your browser does not support the HTML5 canvas tag.
@@ -43,6 +51,7 @@
         <canvas id="DragonLife" width="550" height="250" hidden>
             Your browser does not support the HTML5 canvas tag.
         </canvas>
+
         <!--!!! Une div par quete !!!-->
         <div id="divTorchQuest" width="1100" height="700">
             <div id="coffre">

@@ -88,9 +88,9 @@ var clickCount = 0;
 $(document).ready(function() {
     var iteration = 3;
     $(".buttonGame").click(function() {
+
         if(serverCombination[clickCount] != this.id) {
             showText("Simon", "/ Perdu ! Reviens me voir quand tu auras le rythme dans la peau!",0);
-
 			quest = false;
             $("#myCanvas").show();
             $("#divCompassQuest").hide();
@@ -109,13 +109,14 @@ $(document).ready(function() {
             } else {
                 showText("Simon", "/ INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
                     "J'ai entendu dire que tu souhaitais traverser la grotte.. Voila qui devrait t'aider ! " +
-                    "Vous avez obtenu la BOUSSOLE !",0);
+                    "/ Vous avez obtenu la BOUSSOLE !",0);
 
                 haveCompass = true;
 
 				quest = false;
                 $("#myCanvas").show();
                 $("#divCompassQuest").hide();
+                $("#boussoleInventaire").show();
             }
         }
     });
