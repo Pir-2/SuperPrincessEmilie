@@ -113,10 +113,11 @@ $(document).ready(function() {
 
                 haveCompass = true;
 
+                sonItemFound();
+
 				quest = false;
                 $("#myCanvas").show();
                 $("#divCompassQuest").hide();
-                sonItemFound();
                 $("#boussoleInventaire").show();
             }
         }
