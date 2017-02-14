@@ -9,7 +9,6 @@
     <script src="js/map.js"></script>
     <script src="js/player.js"></script>
 
-    <script src="js/torchQuest.js"></script>
     <script src="js/lightdown.js"></script>
     <script src="js/compassQuest.js"></script>
     <script src="js/fightDragon.js"></script>
@@ -53,24 +52,32 @@
         </canvas>
 
         <!--!!! Une div par quete !!!-->
-        <div id="divTorchQuest" width="1100" height="700">
-            <div id="coffre">
-                <img class="itemTorch" src="img/gameDragDrop/torch.png"/>
-                <!--<img class="itemPant draggable" src="img/gameDragDrop/pant.png"/>-->
-                <!--<img class="itemShirt draggable" src="img/gameDragDrop/shirt.png"/>-->
-                <img class="itemShovel draggable" src="img/gameDragDrop/shovel.png"/>
-                <!--<img class="itemSock draggable" src="img/gameDragDrop/sock.png"/>-->
-                <!--<img class="itemSword draggable" src="img/gameDragDrop/sword.png"/>-->
-            </div>
-
-            <div class="dropper">
-            </div>
-        </div>
         <div id="divLightDown" width="1100" height="700">
             <img id="torche"  class="torche" src="img/Torche.png" alt="torche" hidden/>
             <img id="sortie" width="1100" height="700" src="img/sortie.jpg" alt="torche" hidden/>
             <img id="torche2" class="torche" src="img/torche2.png" alt="torche" hidden/>
         </div>
+
+        <div id="divTorchQuest" width="1100" height="700" hidden>
+            <div id="zoneMinijeu">
+                <div id="coffre">
+                    <img id="itemTorch" src="img/gameDragDrop/torch.png"/>
+                    <img class="draggable" id="bag" src="img/gameDragDrop/bag.png"/>
+                    <img class="draggable" id="wood" src="img/gameDragDrop/wood.png"/>
+                    <img class="draggable" id="shovel" src="img/gameDragDrop/shovel.png"/>
+                    <img class="draggable" id="axe" src="img/gameDragDrop/axe.png"/>
+                    <img class="draggable" id="calice" src="img/gameDragDrop/calice.png"/>
+                    <img class="draggable" id="selle" src="img/gameDragDrop/selle.png"/>
+                    <img class="draggable" id="pilon" src="img/gameDragDrop/pilon.png"/>
+                    <img class="draggable" id="skin" src="img/gameDragDrop/skin.png"/>
+                </div>
+
+                <div class="dropper">
+
+                </div>
+            </div>
+        </div>
+
         <div id="divCompassQuest" width="1100" height="700">
             <div id="buttonCompassQuest">
                 <button class="buttonGame" id="redButton" disabled></button>
@@ -95,6 +102,7 @@
         </div>
     </div>
 
+    <script src="js/dragAndDrop.js"></script>
 
 </body>
 </html>

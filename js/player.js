@@ -284,6 +284,6 @@ function DessinerMouvement(decalagex, decalagey) {
     //on dessine le joueur
     ctx.drawImage(player.sprite,player.x[player.regard],player.y[player.regard],player.width,player.height,player.position_x*tiles_dimension+decalagex,player.position_y*tiles_dimension-player.height+tiles_dimension+decalagey,player.width,player.height);
     if(map.id == 3 ||map.id == 6){
-        //drawHalo(player.position_x,player.position_y);
+        drawHalo(player.position_x+(decalagex/tiles_dimension),player.position_y+(decalagey/tiles_dimension));
     }
 }

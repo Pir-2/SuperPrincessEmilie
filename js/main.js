@@ -136,7 +136,7 @@ function Dessiner() {
     //on dessine le joueur
     ctx.drawImage(player.sprite,player.x[player.regard],player.y[player.regard],player.width,player.height,player.position_x*tiles_dimension,player.position_y*tiles_dimension-player.height+tiles_dimension,player.width,player.height);
     if(map.id == 3 ||map.id == 6){
-        //drawHalo(player.position_x,player.position_y);
+        drawHalo(player.position_x,player.position_y);
     }
 }
 
@@ -258,8 +258,6 @@ function khandle(e) {
     else if((map.map[player.position_y][player.position_x]) == 38){
         mapLevelUp(map.id);
     }
-
-    //Dessiner();
 }
 
 /**
@@ -498,14 +496,15 @@ function launchTorchQuest() {
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
         "Je dois avoir une torche dans ce coffre, essaye de la trouver." +
         "Pour trouver la torche, déplace le contenu du coffre de gauche dans celui de droite." +
-        "Une fois que tu verras la torche, clique dessus.", 0, 1);
+        "Une fois que tu verras la torche, clique dessus. /", 0, 1);
 }
 
 /**
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    showTextAndLaunchQuest("Simon", "/Elle est ou Jeanne ?",0, 2);
+    showTextAndLaunchQuest("Simon", "/ Tu auras besoin d'une boussole pour te repérer dans la grotte ! Gagne notre petit jeu" +
+        " et nous t'en donnerons une ! /",0, 2);
 }
 /**
  * lance l'extinction de la torche
