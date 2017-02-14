@@ -80,6 +80,7 @@ function hexc(colorval) {
 
 function playerTurn() {
     showText("Simon", "/ A toi de jouer !",0);
+    $(".buttonGame").prop('disabled', false);
 }
 
 var clickCount = 0;
@@ -104,6 +105,7 @@ $(document).ready(function() {
                 iteration++;
 
                 launchDialog(iteration);
+                $(".buttonGame").prop('disabled', true);
             } else {
                 showText("Simon", "/ INCROYABLE ! Je suis forcé de te récompenser après avoir admiré ton talent." +
                     "J'ai entendu dire que tu souhaitais traverser la grotte.. Voila qui devrait t'aider ! " +
