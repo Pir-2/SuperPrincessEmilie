@@ -616,3 +616,8 @@ function sonDebut(){
     soundManager.debugMode = true;
     soundManager.play('Fond','sound/village.mp3');*/
 }
+function sonBois(){
+    /*soundManager.url = 'swf/';
+     soundManager.debugMode = true;
+     soundManager.play('Fond','sound/woods.mp3');*/
+}

@@ -14,7 +14,7 @@ buttonTab[3] = new Array("blueButton", "#6690fe");
 function launchDialog(iteration) {
 	quest=true;
     if(iteration === 3) {
-        showText("Simon", "/ Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prêtes ? C'est parti !",0);
+        showText("Simon", "/ Essaye de suivre le rythme ! Reproduis les combinaisons de couleurs ! Tu es prête ? C'est parti !",0);
 
         setTimeout(function() {
             startPhase(800, 3);
