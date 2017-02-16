@@ -1,0 +1,99 @@
+    #divTorchQuest {
+        background-image: url("../img/gameDragDrop/fond.png");
+        background-repeat: no-repeat;
+        width: 1100px;
+        height: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #coffre {
+        background-image: url("../img/gameDragDrop/coffre.png");
+        background-repeat: no-repeat;
+        width: 421px;
+        height: 387px;
+
+        position:relative;
+        float:left;
+        top: 100px;
+        left: 5%;
+    }
+	
+	#bag {
+		position: absolute;
+        right: 190px;
+        bottom: 100px;
+	}
+    #wood {
+        position: absolute;
+        right: 60px;
+        bottom: 200px;
+    }
+    #shovel {
+        position: absolute;
+        right: 60px;
+        bottom: 20px;
+    }
+
+    #axe {
+        position: absolute;
+        right: 60px;
+        bottom: 20px;
+    }
+
+    #calice {
+        position: absolute;
+        right: 60px;
+        bottom: 20px;
+    }
+
+    #selle {
+        position: absolute;
+        right: 0px;
+        bottom: 20px;
+    }
+
+    #pilon {
+        position: absolute;
+        right: 120px;
+        bottom: 0px;
+    }
+
+    #skin {
+        position: absolute;
+        right: 0px;
+        bottom: -20px;
+    }
+
+    .dropper {
+        background-image: url("../img/gameDragDrop/coffre.png");
+        background-repeat: no-repeat;
+        width: 421px;
+        height: 387px;
+        transition: all 200ms linear;
+
+        position:relative;
+        float:right;
+        top: 100px;
+        right: 5%;
+    }
+
+    #itemTorch {
+        position: relative;
+        left: 50px;
+        top: 50px;
+    }
+
+    #itemShovel {
+        
+    }
+
+    .drop_hover {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
+    }
+
+    .draggable {
+        cursor: move;
+        transition: all 200ms linear;
+        user-select: none;
+    }
