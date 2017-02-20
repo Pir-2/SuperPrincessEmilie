@@ -24,7 +24,7 @@ function microphoneSound(){
                             $("#torche2").show();
                             setTimeout(function(){
                                 $("#divLightDown").hide();
-                                $("#myCanvas").show();
+                                $("#mainZone").show();
                                 showText("","Bravo ! Tu peux continuer. /",0);
                             },1000);
                             break;

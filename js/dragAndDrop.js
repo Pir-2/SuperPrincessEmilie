@@ -8,7 +8,7 @@
     sonItemFound();
 
     $("#divTorchQuest").hide();
-    $("#myCanvas").show();
+    $("#mainZone").show();
     $("#torcheInventaire").show();
 });
 

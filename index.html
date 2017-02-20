@@ -26,7 +26,7 @@
     <img id="tileset" src="img/tileset.png" alt="tileset" hidden/>
     <img id="player" src="img/player.png" alt="player" hidden/>
 
-    <!--Zone contenant la carte du monde et les quêtes-->
+    <!--Zone contenant la carte du monde, l'inventaire et le chrono-->
     <div id="mainZone">
         <h1 id="inventaire"> Mon inventaire </h1>
 
@@ -39,67 +39,68 @@
         <canvas id="myCanvas" width="640" height="640" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML5 canvas tag.
         </canvas>
+    </div>
 
-        <!--QTE-->
-        <canvas id="canvasFightDragon" width="1100" height="550" hidden>
-            Your browser does not support the HTML5 canvas tag.
-        </canvas>
-        <canvas id="EmilieLife" width="550" height="250" hidden>
-            Your browser does not support the HTML5 canvas tag.
-        </canvas>
-        <canvas id="DragonLife" width="550" height="250" hidden>
-            Your browser does not support the HTML5 canvas tag.
-        </canvas>
-
-        <!--!!! Une div par quete !!!-->
-        <div id="divLightDown" width="1100" height="700">
-            <img id="torche"  class="torche" src="img/Torche.png" alt="torche" hidden/>
-            <img id="sortie" width="1100" height="700" src="img/sortie.jpg" alt="torche" hidden/>
-            <img id="torche2" class="torche" src="img/torche2.png" alt="torche" hidden/>
+    <div id="divCompassQuest" width="1100" height="700">
+        <div id="buttonCompassQuest">
+            <button class="buttonGame" id="redButton" disabled></button>
+            <button class="buttonGame" id="blueButton" disabled></button>
+            <button class="buttonGame" id="greenButton" disabled></button>
+            <button class="buttonGame" id="yellowButton" disabled></button>
         </div>
 
-        <div id="divTorchQuest" width="1100" height="700" hidden>
-            <div id="zoneMinijeu">
-                <div id="coffre">
-                    <img id="itemTorch" src="img/gameDragDrop/torch.png"/>
-                    <img class="draggable" id="bag" src="img/gameDragDrop/bag.png"/>
-                    <img class="draggable" id="wood" src="img/gameDragDrop/wood.png"/>
-                    <img class="draggable" id="shovel" src="img/gameDragDrop/shovel.png"/>
-                    <img class="draggable" id="axe" src="img/gameDragDrop/axe.png"/>
-                    <img class="draggable" id="calice" src="img/gameDragDrop/calice.png"/>
-                    <img class="draggable" id="selle" src="img/gameDragDrop/selle.png"/>
-                    <img class="draggable" id="pilon" src="img/gameDragDrop/pilon.png"/>
-                    <img class="draggable" id="skin" src="img/gameDragDrop/skin.png"/>
-                </div>
+        <img class="hiddenImg" src="img/compassQuest/fond1.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond2.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond3.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond4.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond5.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond6.png"/>
+        <img class="hiddenImg" src="img/compassQuest/fond7.png"/>
+    </div>
 
-                <div class="dropper">
 
-                </div>
+    <div id="divFightQuest" width="1100" height="700">
+        <canvas id="canvasFightDragon" width="1100" height="550">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <canvas id="EmilieLife" width="550" height="250">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <canvas id="DragonLife" width="550" height="250">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+
+    <div id="divLightDown" width="1100" height="700">
+        <img id="torche"  class="torche" src="img/Torche.png" alt="torche" hidden/>
+        <img id="sortie" width="1100" height="700" src="img/sortie.jpg" alt="fond" hidden/>
+        <img id="torche2" class="torche" src="img/torche2.png" alt="torche" hidden/>
+    </div>
+
+    <div id="divTorchQuest" width="1100" height="700" hidden>
+        <div id="zoneMinijeu">
+            <div id="coffre">
+                <img id="itemTorch" src="img/gameDragDrop/torch.png"/>
+                <img class="draggable" id="bag" src="img/gameDragDrop/bag.png"/>
+                <img class="draggable" id="wood" src="img/gameDragDrop/wood.png"/>
+                <img class="draggable" id="shovel" src="img/gameDragDrop/shovel.png"/>
+                <img class="draggable" id="axe" src="img/gameDragDrop/axe.png"/>
+                <img class="draggable" id="calice" src="img/gameDragDrop/calice.png"/>
+                <img class="draggable" id="selle" src="img/gameDragDrop/selle.png"/>
+                <img class="draggable" id="pilon" src="img/gameDragDrop/pilon.png"/>
+                <img class="draggable" id="skin" src="img/gameDragDrop/skin.png"/>
+            </div>
+
+            <div class="dropper">
+
             </div>
         </div>
+    </div>
 
-        <div id="divCompassQuest" width="1100" height="700">
-            <div id="buttonCompassQuest">
-                <button class="buttonGame" id="redButton" disabled></button>
-                <button class="buttonGame" id="blueButton" disabled></button>
-                <button class="buttonGame" id="greenButton" disabled></button>
-                <button class="buttonGame" id="yellowButton" disabled></button>
-            </div>
-
-            <img class="hiddenImg" src="img/compassQuest/fond1.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond2.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond3.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond4.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond5.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond6.png"/>
-            <img class="hiddenImg" src="img/compassQuest/fond7.png"/>
-        </div>
-
-        <!--Boite de dialogue-->
-        <div class="box">
-            <div id="title"><span id="name">Name</span></div>
-            <div id="message"></div>
-        </div>
+    <!--Boite de dialogue-->
+    <div class="box">
+        <div id="title"><span id="name">Name</span></div>
+        <div id="message"></div>
     </div>
 
     <script src="js/dragAndDrop.js"></script>

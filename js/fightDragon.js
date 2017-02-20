@@ -53,7 +53,7 @@ function lifeDragon(){
         var c = document.getElementById("DragonLife");
         var ctx = c.getContext("2d");
         clear(ctx,c);
-        ctx.drawImage(imgVieDragon,152,0,350,160);
+        ctx.drawImage(imgVieDragon,100,0,350,160);
         ctx.fillStyle="#FF5555";
         ctx.fillRect(200+pos,111,22*lifeD,15);
     }
@@ -140,17 +140,26 @@ function drawDescenteFleche(img, c, ctx, top, left, height){
             }
         }
         else if(lifeD <= 0){
-            alert("Vous avez terminé le jeu ! Une petite photo souvenir pour vous remémorer ce magnifique combat ?");
-            document.location.href = "photo-finish.html";
+            showText("Dragon", "/ Comment oses-tu ?! VA ! Reprend ton Prince et allez-vous en ! / " +
+                "Vous avez terminé le jeu ! Félicitation ! Une petite photo souvenir pour vous remémorer ce magnifique combat ?",0);
+
+            setTimeout(function() {
+                document.location.href = "photo-finish.html";
+            }, 10000);
+
+
         }
         else if(lifeE <= 0){
-            alert("Vous avez perdu ! Vous pouvez recommencer.");
-            lifeD = 10;
-            lifeE = 10;
-            lifeDragon();
-            lifeEmilie();
-            drawQTE();
-            drawFleche(250);
+            showText("Dragon", "/ Hahaha ! Tu es faible ! Essaye encore...",0);
+
+            setTimeout(function() {
+                lifeD = 10;
+                lifeE = 10;
+                lifeDragon();
+                lifeEmilie();
+                drawQTE();
+                drawFleche(250);
+            }, 4000);
         }
     }
 }

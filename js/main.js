@@ -228,7 +228,7 @@ function khandle(e) {
     //Ferme la discussion avec le singe (TEST)
     if(e.keyCode === 27)
     {
-        $("#myCanvas").show();
+        $("#mainZone").show();
         $("#divTorchQuest").hide();
     }
 
@@ -507,7 +507,7 @@ function launchTorchQuest() {
  * Démarre la quête de la boussole après avoir parlé au PNJ
  */
 function launchCompassQuest() {
-    showTextAndLaunchQuest("Simon", "/ Bienvenue dans la forêt des singes joueurs ! Gagne notre petit jeu" +
+    showTextAndLaunchQuest("Simon", "/ Bienvenue dans la forêt des singes jeune Princesse ! Gagne notre petit jeu" +
         " et nous te donnerons quelque chose d'utile ! /",0, 2);
 }
 /**
@@ -589,26 +589,27 @@ function showScreenQuest(questId)
 {
     switch(questId) {
         case 1:
-            $("#myCanvas").hide();
+            $("#mainZone").hide();
             $("#divTorchQuest").show();
             break;
         case 2:
-            $("#myCanvas").hide();
+            $("#mainZone").hide();
             $("#divCompassQuest").show();
             launchDialog(3);
             break;
         case 3:
-            $("#myCanvas").hide();
+            $("#mainZone").hide();
             $("#divLightDown").show();
             $("#sortie").show();
             $("#torche").show();
             microphoneSound();
             break;
         case 4:
-            $("#myCanvas").hide();
-            $("#canvasFightDragon").show();
-            $("#EmilieLife").show();
-            $("#DragonLife").show();
+            $("#mainZone").hide();
+            $("#divFightQuest").show();
+            // $("#canvasFightDragon").show();
+            // $("#EmilieLife").show();
+            // $("#DragonLife").show();
             fight();
             lanceQTE();
             break;

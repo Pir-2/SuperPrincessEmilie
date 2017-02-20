@@ -92,7 +92,7 @@ $(document).ready(function() {
         if(serverCombination[clickCount] != this.id) {
             showText("Simon", "/ Perdu ! Reviens me voir quand tu auras le rythme dans la peau!",0);
 			quest = false;
-            $("#myCanvas").show();
+            $("#mainZone").show();
             $("#divCompassQuest").hide();
             return;
         }
@@ -116,7 +116,7 @@ $(document).ready(function() {
                 sonItemFound();
 
 				quest = false;
-                $("#myCanvas").show();
+                $("#mainZone").show();
                 $("#divCompassQuest").hide();
                 $("#boussoleInventaire").show();
             }
