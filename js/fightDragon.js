@@ -55,7 +55,7 @@ function lifeDragon(){
         clear(ctx,c);
         ctx.drawImage(imgVieDragon,100,0,350,160);
         ctx.fillStyle="#FF5555";
-        ctx.fillRect(200+pos,111,22*lifeD,15);
+        ctx.fillRect(150+pos,111,22*lifeD,15);
     }
 }
 

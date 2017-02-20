@@ -225,7 +225,7 @@ function khandle(e) {
 			}
 		}
 	}
-    //Ferme la discussion avec le singe (TEST)
+
     if(e.keyCode === 27)
     {
         $("#mainZone").show();
@@ -397,7 +397,7 @@ function mapTop(id) {
             if(haveTorch && haveCompass) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
-                player.position_y = 1;//19
+                player.position_y = 19;//19
                 break;
             } else {
                 alert("Tu es sur le point d'entrer dans la grotte ! " +
@@ -517,7 +517,7 @@ function launchTorchQuest() {
         "Si tu veux rattraper les bandits, tu dois passer par la grotte ! " +
         "Je dois avoir une torche dans ce coffre, essaye de la trouver." +
         "Pour trouver la torche, déplace le contenu du coffre de gauche dans celui de droite." +
-        "Une fois que tu verras la torche, clique dessus. /", 0, 1);
+        "Une fois que tu verras la torche, clique dessus.", 0, 1);
 }
 
 /**
