@@ -18,7 +18,7 @@ var map = null;
 var tileset = null;
 var tiles_dimension = 32;
 var tileset_width = 10;
-var tileset_height = 16;
+var tileset_height = 18;
 //position x de la tile en fonction de son numéro
 var tileset_x = new Array();
 //position y de la tile en fonction de son numéro
@@ -69,12 +69,12 @@ var haveCompass = false;
 /**
  * Saisir dans ce tableau l'id des tiles ou le personnage peut se déplacer.
  */
-var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 38, 39, 46];
+var tileAvailable = [0, 1, 2, 3, 4, 5, 6, 7, 8, 38, 39, 46, 116, 129, 130, 140, 141, 142, 143, 153, 159, 160, 161, 162, 163, 170, 171, 172, 173, 138];
 
 /**
  * Saisir dans ce tableau l'id des tiles représentant un PNJ à qui parler
  */
-var tileToTalk = [56, 47, 48, 49, 57, 58, 59, 67, 68, 69];
+var tileToTalk = [9, 56, 47, 48, 49, 57, 58, 59, 67, 68, 69, 87, 132, 133, 151, 152, 155, 167, 168, 169, 174, 175, 177];
 
 /**
  * Lorsque le HTML est chargé,
@@ -108,7 +108,7 @@ function initTileSet() {
     //on remplit les variables tileset_x et tileset_y
     for(var i=0; i<tileset_width; i++)
     {
-        for(var j=0; j<tileset_width; j++)
+        for(var j=0; j<tileset_height; j++)
         {
             tileset_x[j*tileset_width+i]=i*tiles_dimension;
             tileset_y[j*tileset_width+i]=j*tiles_dimension;
@@ -333,7 +333,7 @@ function mapRight(id) {
             sonDebut();
             map = new Map(0);
             player.position_x = 0;
-            player.position_y = 12;
+            player.position_y +=2;
             break;
         case 0:
             map = new Map(1);
@@ -349,7 +349,7 @@ function mapRight(id) {
             sonEntreeGrotte();
             map = new Map(5);
             player.position_x = 0;
-            player.position_y = 8;
+            player.position_y = 10;
             break;
     }
 }
@@ -381,6 +381,7 @@ function mapLeft(id) {
             sonDebut();
             map = new Map(1);
             player.position_x = 19;
+            player.position_y -=2;
             break;
     }
 }
@@ -393,7 +394,7 @@ function mapTop(id) {
     drawHalo(player.position_x,player.position_y);
     switch(id) {
         case 5:
-            if(true) { //haveTorch && haveCompass
+            if(haveTorch && haveCompass) { //haveTorch && haveCompass
                 sonGrotte();
                 map = new Map(3);
                 player.position_y = 1;//19
@@ -448,39 +449,55 @@ function startToTalk(idPnj)
 {
     switch(idPnj) 
 	{
-        case 119:
-            //launchMonkeyQuest();
-            launchTorchQuest();
+        case 9:
+            showText("Emilie","/Je ne rentrerais pas avant d'avoir tué la bête !",0);
             break;
         case 56:
             launchCompassQuest();
             break;
         case 47:
-            launchDragonFight();
-            break;
         case 48:
-            launchDragonFight();
-            break;
         case 49:
-            launchDragonFight();
-            break;
         case 57:
-            launchDragonFight();
-            break;
         case 58:
-            launchDragonFight();
-            break;
         case 59:
-            launchDragonFight();
-            break;
         case 67:
-            launchDragonFight();
-            break;
         case 68:
-            launchDragonFight();
-            break;
         case 69:
             launchDragonFight();
+            break;
+        case 87:
+            showText("Emilie","/En tant que future reine je ne devrais pas espionner mes sujets ainsi.",0);
+            break;
+        case 132:
+        case 133:
+            showText("Emilie","/De nombreux ouvrages écrits en langue nanesque mais je ne connais pas le Khuzdul. Oh, celui-ci est écrit dans la langue de mon royaume, ''Le syndrome de stockholm pour les nuls''............Bon bah moi j'ai un dragon qui m'attend.",0);
+            break;
+        case 151:
+        case 152:
+            showText("Emilie","/Une tombe. Oh, ma déesse, protège moi en ses heures sombres, donnes moi la force de vaincre, que mon corps n'ailles pas rejoindre celui de ces braves.",0);
+            break;
+        case 155:
+            mapTop(5);
+            Dessiner();
+            break;
+        case 167:
+            launchTorchQuest();
+            break;
+        case 168:
+            showText("Fillette","/Tu veux tuer le dragon? Il va te falloir passer par la grotte pour atteindre le coeur du volcan. Le vieil homme d'à côté doit avoir une torche à te prêter. Si tu cherches une boussole j'ai entendu dire que des singes en ont volé une et se sont réfugiés dans la forêt à l'ouest d'ici.",0);
+            break;
+        case 169:
+            showText("Nain","/Si tu touches à un cheveux de notre protégée tu auras affaire à nous!",0);
+            break;
+        case 174:
+            showText("Emilie","/On dirait un vieux journal ... ''Le sol tremble, les tambours viennent des profondeurs, nous ne pouvons plus sortir''...",0);
+            break;
+        case 175:
+            showText("Emilie","/...''Blanche comme la neige'' ''rouges comme le sang'' et ''noirs comme l'ébène''.... mais c'est quoi ce livre?",0);
+            break;
+        case 177:
+            showText("Emilie","/Woah! Les nains aiment vraiment l'argent.",0);
             break;
     }
 }
